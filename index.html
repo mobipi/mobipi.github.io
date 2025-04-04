@@ -1,0 +1,596 @@
+<!DOCTYPE html>
+
+<html lang="en">
+  <head>
+    <meta charset="UTF-8">
+
+    <meta name="description" content="Project website for Mobi-π">
+    <meta name="author" content="Jingyun Yang">
+    <meta name="viewport" content="width=device-width, initial-scale=1">
+    <link rel="icon" href="icons/robot_icon.png">
+    <script src="https://cdn.tailwindcss.com"></script>
+    <script type="text/javascript" id="MathJax-script" async src="https://cdn.jsdelivr.net/npm/mathjax@3/es5/tex-chtml.js"></script>
+    <script src="https://unpkg.com/alpinejs" defer></script>
+</script>
+    <!-- Google tag (gtag.js) -->
+    <!-- <script async src="https://www.googletagmanager.com/gtag/js?id=G-LRVH8WKJNF"></script>
+    <script>
+      window.dataLayer = window.dataLayer || [];
+      function gtag(){dataLayer.push(arguments);}
+      gtag('js', new Date());
+
+      gtag('config', 'G-LRVH8WKJNF');
+    </script> -->
+    <title>Mobi-π</title>
+  </head>
+
+  <style>
+    .grad_text {
+      background: -webkit-linear-gradient(left, #3498DB, #3498DB);
+      -webkit-background-clip: text;
+      -webkit-text-fill-color: transparent;
+    }
+  </style>
+
+  <body class="text-lg">
+    <div x-data="{ open: false }" class="relative">
+      <!-- 🔹 Topbar (visible on md and smaller only) -->
+      <div class="lg:hidden fixed top-0 left-0 w-full bg-black text-white px-4 py-3 z-50 flex items-center justify-between shadow">
+        <button @click="open = true">
+          <!-- Hamburger icon -->
+          <svg class="w-6 h-6 text-white" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+            <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2"
+              d="M4 6h16M4 12h16M4 18h16" />
+          </svg>
+        </button>
+        <h1 class="text-lg font-semibold">Mobi-\(\pi\)</h1>
+        <div class="w-6 h-6"></div> <!-- Spacer to balance hamburger -->
+      </div>
+
+      <!-- 🔹 Fullscreen overlay menu (mobile only) -->
+      <div x-show="open"
+           @click="open = false"
+           x-transition:enter="transition-opacity ease-out duration-300"
+           x-transition:enter-start="opacity-0"
+           x-transition:enter-end="opacity-100"
+           x-transition:leave="transition-opacity ease-in duration-200"
+           x-transition:leave-start="opacity-100"
+           x-transition:leave-end="opacity-0"
+           class="fixed inset-0 bg-black/90 text-white z-40 flex flex-col items-center justify-center space-y-6 text-xl font-medium lg:hidden"
+      >
+        <!-- <button @click="open = false" class="absolute top-4 right-4 text-white text-2xl">✕</button> -->
+        <a href="#overview" @click="open = false" class="block hover:text-white px-2 py-1">Overview</a>
+        <a href="#video" @click="open = false" class="block hover:text-white px-2 py-1">Video</a>
+        <a href="#problem" @click="open = false" class="block hover:text-white px-2 py-1">Problem Formulation</a>
+        <a href="#benchmark" @click="open = false" class="block hover:text-white px-2 py-1">Sim Benchmark</a>
+        <a href="#metrics" @click="open = false" class="block hover:text-white px-2 py-1">Metrics</a>
+        <a href="#method" @click="open = false" class="block hover:text-white px-2 py-1">Method</a>
+        <a href="#setup" @click="open = false" class="block hover:text-white px-2 py-1">Real Robot Setup</a>
+        <a href="#result" @click="open = false" class="block hover:text-white px-2 py-1">Results</a>
+      </div>
+      <!-- Sidebar Wrapper -->
+      <aside class="hidden lg:block fixed top-0 left-0 h-screen w-64 bg-black text-white px-6 py-8 space-y-6 overflow-y-auto z-30">
+        <!-- Logo -->
+        <div class="text-2xl px-2 pt-5 font-bold mb-6">Mobi-\(\pi\)</div>
+        <div class="border-gray-0 py-5"></div>
+        <!-- Section: Latest Advancements -->
+        <p class="text-xs text-gray-500 uppercase tracking-wide px-2 py-0">Sections</p>
+        <div class="space-y-4">
+          <a href="#overview" class="block text-sm hover:text-white px-2 py-1">Overview</a>
+          <a href="#video" class="block text-sm hover:text-white px-2 py-1">Video</a>
+          <a href="#problem" class="block text-sm hover:text-white px-2 py-1">Problem Formulation</a>
+          <a href="#benchmark" class="block text-sm hover:text-white px-2 py-1">Sim Benchmark</a>
+          <a href="#metrics" class="block text-sm hover:text-white px-2 py-1">Metrics</a>
+          <a href="#method" class="block text-sm hover:text-white px-2 py-1">Method</a>
+          <a href="#setup" class="block text-sm hover:text-white px-2 py-1">Real Robot Setup</a>
+          <a href="#result" class="block text-sm hover:text-white px-2 py-1">Results</a>
+        </div>
+      </aside>
+
+      <main class="lg:ml-64" x-effect="document.body.classList.toggle('overflow-hidden', open)">
+        <section id="overview" class="scroll-mt-24">
+          <div class="flex flex-col items-center px-5 pt-12 pb-12 mx-auto max-w-3xl sm:px-6 lg:px-8 md:pt-24 lg:pt-32">
+            <div class="flex w-full text-left">
+              <div class="relative inline-flex items-center mx-auto align-middle">
+                <div class="text-left">
+                  <h1 class="max-w-5xl text-3xl font-bold leading-none tracking-tighter text-black-600 md:text-5xl lg:text-5xl lg:max-w-3xl">
+                    <span class="grad_text">Mobi-π</span>: Mobilizing Your Robot Learning Policy
+                  </h1>
+                  <p class="max-w-3xl mx-auto mt-8 text-md md:text-md lg:text-md lg:text-md leading-relaxed text-gray-600 space-x-5">
+                    <a href="https://yjy0625.github.io/" class="hover:text-gray-800">Jingyun Yang<sup>1</sup></a>
+                    <a href="https://scholar.google.com/citations?user=04Ta98kAAAAJ&hl=en" class="hover:text-gray-800">Isabella Huang<sup>2</sup></a>
+                    <a href="https://scholar.google.com/citations?user=fdmYi1YAAAAJ&hl=en" class="hover:text-gray-800">Brandon Vu<sup>1</sup></a>
+                  </p>
+                  <p class="max-w-3xl mx-auto mt-0 text-md md:text-md lg:text-md lg:text-md leading-relaxed text-gray-600 space-x-5">
+                    <a href="https://www.tri.global/about-us/max-bajracharya" class="hover:text-gray-800">Max Bajracharya<sup>2</sup></a>
+                    <a href="https://contactrika.github.io/" class="hover:text-gray-800">Rika Antonova<sup>3</sup></a>
+                    <a href="https://web.stanford.edu/~bohg/" class="hover:text-gray-800">Jeannette Bohg<sup>1</sup></a>
+                  </p>
+                  <div class="space-y-2">
+                    <p class="max-w-3xl mx-auto mt-3 text-md md:text-md lg:text-md lg:text-md leading-relaxed text-gray-400 space-x-3">
+                      <span><sup>1</sup>Stanford University</span>
+                      <span><sup>2</sup>Toyota Research Institute</span>
+                      <span><sup>3</sup>University of Cambridge</span>
+                    </p>
+                  </div>
+                  <div class="flex items-center justify-left w-full max-w-3xl gap-2 mx-auto mt-6">
+                    <a href="./pdf/mobipi.pdf" class="inline-flex items-center text-white bg-gray-700 hover:bg-gray-800 focus:ring-4 focus:ring-gray-300 font-medium rounded-lg text-sm px-4 py-3 mr-2 mb-2 dark:bg-gray-600 dark:hover:bg-gray-700 focus:outline-none dark:focus:ring-gray-800">
+                      <svg aria-hidden="true" class="w-5 h-5 mr-2" xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 24 24" stroke-width="1.5" stroke="currentColor" class="w-6 h-6">
+                        <path stroke-linecap="round" stroke-linejoin="round" d="M19.5 14.25v-2.625a3.375 3.375 0 00-3.375-3.375h-1.5A1.125 1.125 0 0113.5 7.125v-1.5a3.375 3.375 0 00-3.375-3.375H8.25m2.25 0H5.625c-.621 0-1.125.504-1.125 1.125v17.25c0 .621.504 1.125 1.125 1.125h12.75c.621 0 1.125-.504 1.125-1.125V11.25a9 9 0 00-9-9z" />
+                      </svg>
+                      <span>Paper</span>
+                    </a>
+                    <a href="https://arxiv.org" class="inline-flex items-center text-white bg-gray-700 hover:bg-gray-800 focus:ring-4 focus:ring-gray-300 font-medium rounded-lg text-sm px-4 py-3 mr-2 mb-2 dark:bg-gray-600 dark:hover:bg-gray-700 focus:outline-none dark:focus:ring-gray-800">
+                      <svg aria-hidden="true" class="w-5 h-5 mr-2" xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 24 24" stroke-width="1.5" stroke="currentColor" class="w-6 h-6">
+                        <path stroke-linecap="round" stroke-linejoin="round" d="M20.25 7.5l-.625 10.632a2.25 2.25 0 01-2.247 2.118H6.622a2.25 2.25 0 01-2.247-2.118L3.75 7.5M10 11.25h4M3.375 7.5h17.25c.621 0 1.125-.504 1.125-1.125v-1.5c0-.621-.504-1.125-1.125-1.125H3.375c-.621 0-1.125.504-1.125 1.125v1.5c0 .621.504 1.125 1.125 1.125z" />
+                      </svg>
+                      <span>Arxiv</span>
+                    </a>
+                    <a href="https://youtube.com" class="inline-flex items-center text-white bg-gray-700 hover:bg-gray-800 focus:ring-4 focus:ring-gray-300 font-medium rounded-lg text-sm px-4 py-3 mr-2 mb-2 dark:bg-gray-600 dark:hover:bg-gray-700 focus:outline-none dark:focus:ring-gray-800">
+                      <svg aria-hidden="true" class="w-5 h-5 mr-2" xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 24 24" stroke-width="1.5" stroke="currentColor" class="w-6 h-6">
+                        <path stroke-linecap="round" stroke-linejoin="round" d="M21 12a9 9 0 11-18 0 9 9 0 0118 0z" /><path stroke-linecap="round" stroke-linejoin="round" d="M15.91 11.672a.375.375 0 010 .656l-5.603 3.113a.375.375 0 01-.557-.328V8.887c0-.286.307-.466.557-.327l5.603 3.112z" />
+                      </svg>
+                      <span>Video</span>
+                    </a>
+                    <a href="https://github.com/yjy0625/mobipi" class="inline-flex items-center text-white bg-gray-700 hover:bg-gray-800 focus:ring-4 focus:ring-gray-300 font-medium rounded-lg text-sm px-4 py-3 mr-2 mb-2 dark:bg-gray-600 dark:hover:bg-gray-700 focus:outline-none dark:focus:ring-gray-800">
+                      <svg aria-hidden="true" class="w-5 h-5 mr-2" xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 24 24" stroke-width="1.5" stroke="currentColor" class="w-6 h-6">
+                        <path stroke-linecap="round" stroke-linejoin="round" d="M14.25 9.75L16.5 12l-2.25 2.25m-4.5 0L7.5 12l2.25-2.25M6 20.25h12A2.25 2.25 0 0020.25 18V6A2.25 2.25 0 0018 3.75H6A2.25 2.25 0 003.75 6v12A2.25 2.25 0 006 20.25z" />
+                      </svg>
+                      <span>Code</span>
+                    </a>
+                  </div>
+                </div>
+              </div>
+            </div>
+            <div class="flex flex-col items-center justify-center pt-3 mx-auto rounded-lg pt-6 max-w-3xl">
+              <img src="./images/teaser.jpg" class="object-cover object-center">
+            </div>
+          </div>
+          <div x-data="{ open: false }" class="flex flex-col items-center px-5 pt-4 pb-4 mx-auto max-w-3xl sm:px-6 lg:px-8">
+            <!-- Toggle Button -->
+            <button @click="open = !open"
+              class="flex items-center justify-between w-full max-w-5xl px-6 py-4 font-medium text-gray-800 bg-gray-100 border-l-4 border-gray-300 hover:bg-gray-100 transition-none rounded-none">
+              <span x-text="open ? '▾ Hide Abstract' : '▸ Show Abstract'"></span>
+            </button>
+
+            <!-- Abstract content -->
+            <div x-show="open" 
+                 x-transition:enter="transition ease-out duration-300"
+                 x-transition:enter-start="opacity-0 max-h-0"
+                 x-transition:enter-end="opacity-100 max-h-[5000px]"
+                 x-transition:leave="transition ease-in duration-200"
+                 x-transition:leave-start="opacity-100 max-h-[5000px]"
+                 x-transition:leave-end="opacity-0 max-h-0"
+                 style="overflow: hidden;"
+                 class="flex flex-col w-full max-w-5xl mx-auto border-l-4 p-12 bg-gray-50 text-left text-gray-800 leading-7">
+              <h2 class="text-2xl font-bold pb-5"><span>Abstract</span></h2>
+              <p>
+                Learned robot policies can handle complex manipulation tasks but often fail to generalize across different viewpoints due to training from fixed robot positions. This limits their use in mobile manipulation, especially for precision tasks like pressing buttons or turning faucets. We tackle this with policy mobilization—optimizing the robot and camera pose to effectively execute a manipulation policy that has been trained using fixed robot positions. To support this, we introduce the Mobi-\(\pi\) framework, which includes: (1) a set of metrics for measuring mobilization feasibility, (2) a simulated suite benchmark tasks, (3) visualization tools, and (4) naive navigation-manipulation baselines. We also propose a novel method that aligns the robot base with in-distribution poses using 3D Gaussian Splatting for viewpoint synthesis, a hybrid scoring function, and sampling-based optimization. Our method outperforms baselines in simulation and real-world evaluations, offering a strong foundation for studying and advancing policy mobilization.
+              </p>
+            </div>
+          </div>
+        </section>
+        <section id="video" class="scroll-mt-24">
+          <div class="flex flex-col items-center px-5 pt-6 pb-3 mx-auto max-w-3xl sm:px-6 lg:px-8">
+            <div class="flex flex-col w-full max-w-6xl mx-auto prose text-left text-gray-800">
+              <h2 class="text-2xl font-bold pb-5"><span class="grad_text">Video</span></h2>
+            </div>
+          </div>
+          <div class="flex flex-col items-center px-5 pt-0 pb-3 mx-auto max-w-6xl sm:px-6 lg:px-8">
+            <video height="auto" width="100%" controls="" style="border: 1px solid #000;">
+              <source src="./video/equibot.mp4" type="video/mp4">
+            </video>
+          </div>
+        </section>
+        <section id="problem" class="scroll-mt-24">
+          <div class="flex flex-col items-center px-5 pt-6 pb-3 mx-auto max-w-3xl sm:px-6 lg:px-8">
+            <div class="flex flex-col w-full max-w-6xl mx-auto prose text-left text-gray-800">
+              <h2 class="text-2xl font-bold pb-5">
+                <span class="grad_text">The Policy Mobilization Problem</span>
+              </h2>
+              <div class="flex flex-col lg:flex-row lg:items-start lg:space-x-8">
+                <!-- Text Content -->
+                <div class="flex-1 space-y-2">
+                  <p>
+                    The policy mobilization problem is, in simple words, the problem of taking an existing manipulation policy that has been trained on data that was collected from only one or a limited set of viewpoints and finding the optimal robot pose in an unseen environment to successfully execute this policy.
+                  </p>
+                  <!-- <p>
+                    Formally, we assume access to an image-based manipulation policy \(\pi\) trained with a standard imitation learning algorithm on data recorded from only one or a limited set of viewpoints and robot poses. The policy takes observation \(o_t\) as input and outputs an action \(a_t\). We are interested in deploying \(\pi\) on a mobile robot in an unseen scene \(S\).
+                  </p> -->
+                  <p>
+                    To study policy mobilization, we propose <b>the Mobi-\(\pi\) framework</b>, which provides metrics for understanding mobilization feasibility, simulated benchmarks and tools across diverse layouts and textures, and baselines.
+                  </p>
+                </div>
+
+                <!-- Image -->
+                <div class="flex-none lg:basis-2/5 flex justify-center pt-6 lg:pt-0">
+                  <img src="./images/problem.jpg" class="object-cover object-center max-w-full rounded-lg" alt="Policy Mobilization Illustration">
+                </div>
+              </div>
+            </div>
+          </div>
+        </section>
+        <section id="benchmark" class="scroll-mt-24">
+          <div class="flex flex-col items-center px-5 pt-6 pb-3 mx-auto max-w-3xl sm:px-6 lg:px-8">
+            <div class="flex flex-col w-full max-w-6xl mx-auto prose text-left text-gray-800">
+              <h2 class="text-2xl font-bold pb-5">
+                <span class="grad_text">Simulated Task Suite for Evaluating Policy Mobilization</span>
+              </h2>
+              <div class="space-y-2">
+                <p>
+                  To effectively study the policy mobilization problem, we develop a suite of simulation environments with RoboCasa as a benchmarking setup. We pick five single-stage manipulation tasks from the RoboCasa benchmark.
+                </p>
+                <p>
+                  Below, we visualize two sample successful episodes for each task. All tasks take place in diverse visual environments. In the <i>Close Door</i> task, the robot might encounter either a cabinet door or a microwave door. The <i>Turn on Faucet</i>, <i>Turn on Microwave</i>, and <i>Turn on Stove</i> tasks require accurate robot placement to be executed correctly. In the <i>Close Drawer</i> task, the drawer can be either on the left or right side of the robot.
+                </p>
+              </div>
+            </div>
+          </div>
+          <div class="w-full bg-gray-50 py-6 mt-3">
+            <div class="max-w-6xl mx-auto px-4 pt-6 pb-1">
+              <div class="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-5 gap-6">
+                <!-- Door Column -->
+                <div class="flex flex-col items-center space-y-2">
+                  <video src="./video/benchmark/door1.mp4" class="w-full rounded" style="border: 5px solid #9da3ae;" autoplay muted loop></video>
+                  <video src="./video/benchmark/door2.mp4" class="w-full rounded" style="border: 5px solid #9da3ae;" autoplay muted loop></video>
+                  <div class="text-center text-md text-black-600 mt-2">Close Door</div>
+                </div>
+                <!-- Faucet Column -->
+                <div class="flex flex-col items-center space-y-2">
+                  <video src="./video/benchmark/faucet1.mp4" class="w-full rounded" style="border: 5px solid #9da3ae;" autoplay muted loop></video>
+                  <video src="./video/benchmark/faucet2.mp4" class="w-full rounded" style="border: 5px solid #9da3ae;" autoplay muted loop></video>
+                  <div class="text-center text-md text-black-600 mt-2">Turn on Faucet</div>
+                </div>
+                <!-- Microwave Column -->
+                <div class="flex flex-col items-center space-y-2">
+                  <video src="./video/benchmark/microwave1.mp4" class="w-full rounded" style="border: 5px solid #9da3ae;" autoplay muted loop></video>
+                  <video src="./video/benchmark/microwave2.mp4" class="w-full rounded" style="border: 5px solid #9da3ae;" autoplay muted loop></video>
+                  <div class="text-center text-md text-black-600 mt-2">Turn on Microwave</div>
+                </div>
+                <!-- Drawer Column -->
+                <div class="flex flex-col items-center space-y-2">
+                  <video src="./video/benchmark/drawer1.mp4" class="w-full rounded" style="border: 5px solid #9da3ae;" autoplay muted loop></video>
+                  <video src="./video/benchmark/drawer2.mp4" class="w-full rounded" style="border: 5px solid #9da3ae;" autoplay muted loop></video>
+                  <div class="text-center text-md text-black-600 mt-2">Close Drawer</div>
+                </div>
+                <!-- Stove Column -->
+                <div class="flex flex-col items-center space-y-2">
+                  <video src="./video/benchmark/stove1.mp4" class="w-full rounded" style="border: 5px solid #9da3ae;" autoplay muted loop></video>
+                  <video src="./video/benchmark/stove2.mp4" class="w-full rounded" style="border: 5px solid #9da3ae;" autoplay muted loop></video>
+                  <div class="text-center text-md text-black-600 mt-2">Turn on Stove</div>
+                </div>
+              </div>
+            </div>
+          </div>
+        </section>
+        <section id="metrics" class="scroll-mt-24">
+          <div class="flex flex-col items-center px-5 pt-6 pb-3 mx-auto max-w-3xl sm:px-6 lg:px-8">
+            <div class="flex flex-col w-full max-w-6xl mx-auto prose text-left text-gray-800">
+              <h2 class="text-2xl font-bold pb-5">
+                <span class="grad_text">Metrics</span>
+              </h2>
+              <div class="space-y-2">
+                <p>
+                  How to know if your policies and scenes are difficult for policy mobilization method? We design two metrics for investigating mobilization feasibility.
+                </p>
+                <p>
+                  <b>Spatial Mobilization Metric.</b> To quantify how feasible a policy can be mobilized from a spatial perspective, we evaluate how pose perturbations affect the task success of fixed-based manipulation policies. Specifically, we measure the task success \(S_\pi(\sigma)\) of policy \(\pi\) given Gaussian noise applied to the base pose modeled as \(N\sim(\mu=0, \sigma^2)\). We then fit an exponential curve using the following form: $$S_\pi(\sigma) = S_{\pi}(\sigma=0) \cdot e^{-\gamma \sigma}.$$ From this fitted curve, we extract the <i>mobilization feasibility metric</i>: $$\phi = \frac{\ln 2}{\gamma}.$$
+                </p>
+                <p>
+                  This metric \(\phi\) can be interpreted as the deviation of the base pose in meters, which causes the policy success rate to drop by half. The higher \(\phi\), the easier it should be to mobilize this policy as its success rate does not decay as fast with deviations from the training pose. 
+                </p>
+              </div>
+            </div>
+          </div>
+          <div class="flex flex-col items-center px-5 pt-0 pb-3 mx-auto max-w-6xl sm:px-6 lg:px-8">
+            <div class="flex flex-col items-center justify-center pt-3 mx-auto rounded-lg pt-6">
+              <img src="./images/spatial_metric.png" class="object-cover object-center">
+            </div>
+          </div>
+          <div class="flex flex-col items-center px-5 pt-6 pb-3 mx-auto max-w-3xl sm:px-6 lg:px-8">
+            <div class="flex flex-col w-full max-w-6xl mx-auto prose text-left text-gray-800">
+              <div class="space-y-2">
+                <p>
+                  <b>Visual Mobilization Metric.</b> In addition to the spatial mobilization feasibility metric, the visual appearance of the tasks can also affect how easy or difficult it is to mobilize a robot policy. For example, if a policy manipulates an object while barely seeing the object in view, then it would be more difficult to find an appropriate location for starting policy execution.
+                </p>
+                <p>
+                  To quantify this, we evaluate how prominently relevant objects of the task are represented in the scene. Formally, we sample \(N_v\) images of the scene at near-optimal poses and compute the average percentage \(S_v\) of the images occupied by the objects of interest in the task.
+                </p>
+              </div>
+            </div>
+          </div>
+          <div class="flex flex-col items-center px-5 pt-2 pb-3 mx-auto max-w-6xl sm:px-6 lg:px-8">
+            <div class="flex flex-col items-center justify-center pt-3 mx-auto rounded-lg pt-6">
+              <img src="./images/visual_metric.jpg" class="object-cover object-center">
+            </div>
+          </div>
+        </section>
+        <section id="method" class="scroll-mt-24">
+          <div class="flex flex-col items-center px-5 pt-6 pb-3 mx-auto max-w-3xl sm:px-6 lg:px-8">
+            <div class="flex flex-col w-full max-w-6xl mx-auto prose text-left text-gray-800">
+              <h2 class="text-2xl font-bold pb-5">
+                <span class="grad_text">Methods for Policy Mobilization</span>
+              </h2>
+            </div>
+            <div class="space-y-2">
+              <p>
+                As part of the Mobi-\(\pi\) framework, we propose a novel method tailored to the policy mobilization problem.
+                The goal of our method is to find a proper robot pose \(p\) for policy initialization such that a given policy \(\pi\) trained from demonstration data \(\mathcal{D}\) can be successfully executed in a scene \(S\).
+              </p>
+              <ul class="list-disc list-inside pl-4 space-y-2">
+                <li>
+                  A proposed robot pose \(p\) is converted to its corresponding camera pose \(v\) via \(v = f_{p \to v}(p)\), which is then sent into a 3D Gaussian Splatting model to produce a rendered image.
+                </li>
+                <li>
+                  The rendered image and the proposed robot pose are passed into a hybrid score function \(K\) that predicts whether the proposed robot pose is suitable for policy initialization.
+                </li>
+                <li>
+                  The score function output is used to update a Bayesian Optimization algorithm, which repeatedly proposes new sampled robot poses to be evaluated and updates its internal belief on which robot poses are optimal for robot policy execution.
+                </li>
+              </ul>
+
+              <p class="mt-2">
+                The hybrid score function is composed of multiple parts powered by visual foundation models so that it can judge whether the proposed pose: (a) is in distribution with respect to the training dataset; (b) has the objects of interest in view; and (c) is collision-free.</li>
+              </ul>
+            </div>
+            <div class="flex flex-col items-center justify-center pt-3 mx-auto rounded-lg pt-6 max-w-4xl">
+              <img src="./images/method.jpg" class="object-cover object-center">
+            </div>
+          </div>
+        </p>
+        <section id="setup" class="scroll-mt-24">
+          <div class="flex flex-col items-center px-5 pt-6 pb-3 mx-auto max-w-3xl sm:px-6 lg:px-8">
+            <div class="flex flex-col w-full max-w-6xl mx-auto prose text-left text-gray-800">
+              <h2 class="text-2xl font-bold pb-5"><span class="grad_text">Real Robot Setup</span></h2>
+              <div>
+                <p>
+                  We demonstrate our method on three real-world tasks in a grocery environment. Our setup includes a bimanual robot mounted on a holonomic robot base.
+                </p>
+              </div>
+            </div>
+          </div>
+          <div class="w-full bg-gray-50">
+            <div class="flex flex-col items-center px-5 pt-6 pb-3 mx-auto max-w-6xl sm:px-6 lg:px-8">
+              <div class="relative items-center max-w-3xl px-2 pt-1 pb-1 mx-auto max-w-6xl">
+                <div class="grid w-9/12 grid-cols-1 gap-3 mx-auto md:grid-cols-3 md:w-full">
+                  <div class="p-2">
+                    <video height="auto" width="100%" style="border: 1px solid #000;" autoplay loop muted>
+                      <source src="./video/eval/tomato_mobpi.mp4" type="video/mp4">
+                    </video>
+                    <p class="pt-1 text-center">Pour Tomatoes</p>
+                  </div>
+                  <div class="p-2">
+                    <video height="auto" width="100%" style="border: 1px solid #000;" autoplay loop muted>
+                      <source src="./video/eval/chip_mobpi.mp4" type="video/mp4">
+                    </video>
+                    <p class="pt-1 text-center">Pick Chips</p>
+                  </div>
+                  <div class="p-2">
+                    <video height="auto" width="100%" style="border: 1px solid #000;" autoplay loop muted>
+                      <source src="./video/eval/paper_mobpi.mp4" type="video/mp4">
+                    </video>
+                    <p class="pt-1 text-center">Bimanual Grab Paper Towels</p>
+                  </div>
+                </div>
+              </div>
+            </div>
+          </div>
+        </section>
+        <section id="result" class="scroll-mt-24">
+          <div class="flex flex-col items-center px-5 pt-6 pb-3 mx-auto max-w-3xl sm:px-6 lg:px-8">
+            <div class="flex flex-col w-full max-w-6xl mx-auto prose text-left text-gray-800">
+              <h2 class="text-2xl font-bold pb-5"><span class="grad_text">Real Robot Results</span></h2>
+              <div class="space-y-2">
+                <p>
+                  We compare our method with three baselines: LeLaN, VLFM, and a Human baseline. In this human baseline, we verbally ask users to manually drive the robot to where they believe is the optimal starting base pose for it to execute each manipulation task successfully, without providing any information on how the policy was trained.
+                </p>
+                <p>
+                  We initialize the robot at 10 random poses 0.5 to 1.5 meters away from the target policy execution pose with the constraint that the robot must have the target scene within the field of view. Starting from the initial poses, we execute each baseline method as well as our proposed method.
+                </p>
+              </div>
+            </div>
+          </div>
+          <div class="flex flex-col items-center px-5 pt-6 pb-3 mx-auto md:max-w-3xl lg:max-w-3xl sm:px-6 lg:px-8">
+            <div class="sm:w-full lg:w-auto overflow-x-auto shadow-md sm:rounded-lg">
+              <table class="min-w-[900px] text-sm text-center text-gray-700">
+                <thead class="text-xs bg-gray-100">
+                  <tr class="uppercase">
+                    <th scope="col"></th>
+                    <th colspan="4" class="px-4 py-3 pb-0 text-md">Pick Chips</th>
+                    <th colspan="4" class="px-4 py-3 pb-0 text-md">Grab Paper Towels</th>
+                    <th colspan="5" class="px-4 py-3 pb-0 text-md">Pour Tomatoes</th>
+                  </tr>
+                  <tr>
+                    <th></th>
+                    <th class="px-4 py-2 text-orange-500">Fatal</th>
+                    <th class="px-4 py-2">Nav</th>
+                    <th class="px-4 py-2">Grasp</th>
+                    <th class="px-4 py-2">Success</th>
+                    <th class="px-4 py-2 text-orange-500">Fatal</th>
+                    <th class="px-4 py-2">Nav</th>
+                    <th class="px-4 py-2">Grab</th>
+                    <th class="px-4 py-2">Success</th>
+                    <th class="px-4 py-2 text-orange-500">Fatal</th>
+                    <th class="px-4 py-2">Nav</th>
+                    <th class="px-4 py-2">Grasp</th>
+                    <th class="px-4 py-2">Pour</th>
+                    <th class="px-4 py-2">Success</th>
+                  </tr>
+                </thead>
+                <tbody>
+                  <tr class="bg-white border-b hover:bg-gray-50">
+                    <th scope="row" class="px-4 py-3 font-medium text-gray-900 whitespace-nowrap text-left">LeLaN</th>
+                    <td class="text-orange-500">10/10</td><td>0/10</td><td>0/10</td><td>0/10</td>
+                    <td class="text-orange-500">10/10</td><td>0/10</td><td>0/10</td><td>0/10</td>
+                    <td class="text-orange-500">10/10</td><td>0/10</td><td>0/10</td><td>0/10</td><td>0/10</td>
+                  </tr>
+                  <tr class="bg-white border-b hover:bg-gray-50">
+                    <th scope="row" class="px-4 py-3 font-medium text-gray-900 whitespace-nowrap text-left">
+                      BC w/ Nav
+                    </th>
+                    <td class="text-orange-500">4/10</td><td>3/10</td><td>0/10</td><td>0/10</td>
+                    <td class="text-orange-500">7/10</td><td>3/10</td><td>3/10</td><td>3/10</td>
+                    <td class="text-orange-500">2/10</td><td>8/10</td><td>7/10</td><td>7/10</td><td>7/10</td>
+                  </tr>
+                  <tr class="bg-white border-b hover:bg-gray-50">
+                    <th scope="row" class="px-4 py-3 font-medium text-gray-900 whitespace-nowrap text-left">
+                      Humans
+                    </th>
+                    <td class="text-orange-500">2/10</td><td>8/10</td><td>2/10</td><td>2/10</td>
+                    <td class="text-orange-500">0/10</td><td>10/10</td><td>4/10</td><td>4/10</td>
+                    <td class="text-orange-500">0/10</td><td>8/10</td><td>2/10</td><td>2/10</td><td>2/10</td>
+                  </tr>
+                  <tr class="bg-white hover:bg-gray-50">
+                    <th scope="row" class="px-4 py-3 font-medium text-gray-900 whitespace-nowrap text-left">
+                      Ours
+                    </th>
+                    <td class="text-orange-500">0/10</td><td>10/10</td><td>7/10</td><td>7/10</td>
+                    <td class="text-orange-500">0/10</td><td>10/10</td><td>10/10</td><td>10/10</td>
+                    <td class="text-orange-500">0/10</td><td>10/10</td><td>9/10</td><td>9/10</td><td>8/10</td>
+                  </tr>
+                </tbody>
+              </table>
+            </div>
+          </div>
+          <div class="flex flex-col items-center px-5 pt-6 pb-3 mx-auto max-w-3xl sm:px-6 lg:px-8">
+            <div class="flex flex-col w-full max-w-6xl mx-auto prose text-left text-gray-800">
+              <div class="space-y-2 mt-4">
+                <p>
+                  Below we show qualitative rollout videos of each baseline and method in all three tasks. All videos are played at <b>2x</b> speed.
+                </p>
+              </div>
+              <div>
+                <!-- 🍅 Pour Tomatoes -->
+                <p class="font-bold pt-4 pb-2">Pour Tomatoes</p>
+                <div class="relative items-center w-full px-2 pt-1 pb-1 mx-auto max-w-6xl">
+                  <div class="grid w-9/12 grid-cols-1 gap-3 mx-auto md:grid-cols-3 md:w-full">
+                    <div class="p-2">
+                      <video width="100%" style="border: 1px solid #000;" autoplay loop muted>
+                        <source src="./video/eval/tomato_ilnav.mp4" type="video/mp4">
+                      </video>
+                      <p class="pt-1 text-center">IL w/ Nav</p>
+                    </div>
+                    <div class="p-2">
+                      <video width="100%" style="border: 1px solid #000;" autoplay loop muted>
+                        <source src="./video/eval/tomato_lelan.mp4" type="video/mp4">
+                      </video>
+                      <p class="pt-1 text-center">LeLaN</p>
+                    </div>
+                    <div class="p-2">
+                      <video width="100%" style="border: 1px solid #000;" autoplay loop muted>
+                        <source src="./video/eval/tomato_human.mp4" type="video/mp4">
+                      </video>
+                      <p class="pt-1 text-center">Human</p>
+                    </div>
+                  </div>
+                </div>
+                <div class="relative items-center w-full px-2 pt-1 pb-1 mx-auto max-w-6xl">
+                  <div class="p-2 mx-auto">
+                    <video width="100%" style="border: 1px solid #000;" autoplay loop muted>
+                      <source src="./video/eval/tomato_mobpi.mp4" type="video/mp4">
+                    </video>
+                    <p class="pt-1 text-center">Our Method</p>
+                  </div>
+                </div>
+
+                <!-- 🍟 Pick Chips -->
+                <p class="font-bold pt-4 pb-2">Pick Chips</p>
+                <div class="relative items-center w-full px-2 pt-1 pb-1 mx-auto max-w-6xl">
+                  <div class="grid w-9/12 grid-cols-1 gap-3 mx-auto md:grid-cols-3 md:w-full">
+                    <div class="p-2">
+                      <video width="100%" style="border: 1px solid #000;" autoplay loop muted>
+                        <source src="./video/eval/chip_ilnav.mp4" type="video/mp4">
+                      </video>
+                      <p class="pt-1 text-center">IL w/ Nav</p>
+                    </div>
+                    <div class="p-2">
+                      <video width="100%" style="border: 1px solid #000;" autoplay loop muted>
+                        <source src="./video/eval/chip_lelan.mp4" type="video/mp4">
+                      </video>
+                      <p class="pt-1 text-center">LeLaN</p>
+                    </div>
+                    <div class="p-2">
+                      <video width="100%" style="border: 1px solid #000;" autoplay loop muted>
+                        <source src="./video/eval/chip_human.mp4" type="video/mp4">
+                      </video>
+                      <p class="pt-1 text-center">Human</p>
+                    </div>
+                  </div>
+                </div>
+                <div class="relative items-center w-full px-2 pt-1 pb-1 mx-auto max-w-6xl">
+                  <div class="p-2 mx-auto">
+                    <video width="100%" style="border: 1px solid #000;" autoplay loop muted>
+                      <source src="./video/eval/chip_mobpi.mp4" type="video/mp4">
+                    </video>
+                    <p class="pt-1 text-center">Our Method</p>
+                  </div>
+                </div>
+
+                <!-- 🧻 Bimanual Grab Paper Towels -->
+                <p class="font-bold pt-4 pb-2">Bimanual Grab Paper Towels</p>
+                <div class="relative items-center w-full px-2 pt-1 pb-1 mx-auto max-w-6xl">
+                  <div class="grid w-9/12 grid-cols-1 gap-3 mx-auto md:grid-cols-3 md:w-full">
+                    <div class="p-2">
+                      <video width="100%" style="border: 1px solid #000;" autoplay loop muted>
+                        <source src="./video/eval/paper_ilnav.mp4" type="video/mp4">
+                      </video>
+                      <p class="pt-1 text-center">IL w/ Nav</p>
+                    </div>
+                    <div class="p-2">
+                      <video width="100%" style="border: 1px solid #000;" autoplay loop muted>
+                        <source src="./video/eval/paper_lelan.mp4" type="video/mp4">
+                      </video>
+                      <p class="pt-1 text-center">LeLaN</p>
+                    </div>
+                    <div class="p-2">
+                      <video width="100%" style="border: 1px solid #000;" autoplay loop muted>
+                        <source src="./video/eval/paper_human.mp4" type="video/mp4">
+                      </video>
+                      <p class="pt-1 text-center">Human</p>
+                    </div>
+                  </div>
+                </div>
+                <div class="relative items-center w-full px-2 pt-1 pb-1 mx-auto max-w-6xl">
+                  <div class="p-2 mx-auto">
+                    <video width="100%" style="border: 1px solid #000;" autoplay loop muted>
+                      <source src="./video/eval/paper_mobpi.mp4" type="video/mp4">
+                    </video>
+                    <p class="pt-1 text-center">Our Method</p>
+                  </div>
+                </div>
+              </div>
+            </div>
+          </div>
+          <div class="flex flex-col items-center px-5 pt-0 pb-12 mx-auto max-w-3xl sm:px-6 lg:px-8">
+            <div class="flex flex-col w-full max-w-6xl mx-auto prose text-left text-gray-800">
+              <h2 class="text-2xl font-bold pb-5"><span class="grad_text">BibTeX</span></h2>
+              <div class="pb-5">
+                <p>
+                  If you produce new research inspired or based on our work, please make sure to cite us using the bibtex below.
+                </p>
+              </div>
+              <pre class="overflow-auto rounded-lg"><code class="language-plaintext text-sm sm:text-base inline-flex text-left items-center space-x-4 bg-gray-100 rounded-lg p-4 pl-6">@inproceedings{yang2025mobipi,
+        title={Mobi-$\pi$: Mobilizing Your Robot Learning Policy}, 
+        author={Yang, Jingyun and Huang, Isabella and Vu, Brandon and Bajracharya, Max and Antonova, Rika and Bohg, Jeannette},
+        booktitle={Proceedings of Robotics: Science and Systems (RSS)},
+        year={2025}
+    }</code></pre>
+            </div>
+          </div>
+        </section>
+        <footer class="bg-white mt-4" aria-labelledby="footer-heading">
+          <h2 id="footer-heading" class="sr-only">Footer</h2>
+          <div class="px-4 py-8 mx-auto bg-gray-50 w-full sm:px-6 lg:px-16">
+            <div class="flex flex-wrap items-baseline lg:justify-center">
+              <span class="text-sm text-center font-light text-gray-600">
+                If you have any questions, please contact Jingyun Yang (jingyuny "at" stanford "dot" edu).
+                <br/>
+                Toyota Research Institute provided funds to support this work.
+              </span>
+            </div>
+          </div>
+        </footer>
+      </div>
+    </div>
+  </body>
+</html>
