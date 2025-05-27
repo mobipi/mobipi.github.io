@@ -1,0 +1,674 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Mobi-π</title>
+  <script src="https://cdn.tailwindcss.com"></script>
+  <script defer src="https://use.fontawesome.com/releases/v6.4.0/js/all.js" crossorigin="anonymous"></script>
+  <style>
+    details summary::-webkit-details-marker { display: none; }
+    summary svg { transition: transform 0.3s ease; }
+    details[open] summary svg { transform: rotate(180deg); }
+  </style>
+</head>
+<body class="antialiased text-gray-900">
+  <!-- Navigation -->
+  <nav class="fixed top-0 w-full bg-white/60 backdrop-blur-md z-50">
+    <div class="max-w-7xl mx-auto flex items-center justify-between px-6 py-4">
+      <a href="#" class="text-xl font-semibold">Mobi-π</a>
+      <ul class="hidden md:flex space-x-8 text-sm uppercase">
+        <li><a href="#paper" class="hover:underline">Paper</a></li>
+        <li><a href="#video" class="hover:underline">Video</a></li>
+        <li><a href="#code" class="hover:underline">Code</a></li>
+        <li><a href="#bibtex" class="hover:underline">Bibtex</a></li>
+        <li><a href="#contact" class="hover:underline">Contact</a></li>
+      </ul>
+      <button class="md:hidden">
+        <svg xmlns="http://www.w3.org/2000/svg" class="h-6 w-6" fill="none" viewBox="0 0 24 24" stroke="currentColor">
+          <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M4 6h16M4 12h16M4 18h16" />
+        </svg>
+      </button>
+    </div>
+  </nav>
+
+  <!-- Hero Section -->
+  <section class="pt-32 pb-24 text-center">
+    <div class="max-w-3xl mx-auto px-6">
+      <h1 class="text-7xl font-bold">Mobi-π</h1>
+      <p class="mt-2 text-3xl text-gray-800">Mobilizing Your Robot Learning Policy</p>
+      <div class="mt-6 flex justify-center space-x-4">
+        <a href="#paper" class="px-6 py-3 bg-orange-600 text-white rounded-full text-lg hover:bg-orange-700">Read Paper</a>
+        <a href="#video" class="px-6 py-3 bg-gray-100 rounded-full text-lg hover:bg-gray-200">Code (Available in June)</a>
+      </div>
+      <div class="mt-12 border-2 border-gray-600 rounded-3xl overflow-hidden">
+        <video src="./video/summary.mp4" controls class="w-full max-w-4xl mx-auto rounded-2xl"></video>
+      </div>
+    </div>
+  </section>
+
+  <!-- TL;DR -->
+  <section class="pb-16 pt-14 px-6 bg-orange-50">
+    <!-- <div class="max-w-3xl mx-auto bg-gray-100 p-6 rounded-lg">
+      <h2 class="text-lg font-semibold mb-4">TL;DR</h2>
+      <p>We propose novel metrics, tasks, visualization tools and methods for “policy mobilization,” the problem of taking a non-mobile manipulation policy and finding a proper initial robot pose from which to execute it on a mobile platform.</p>
+    </div> -->
+    <div class="max-w-4xl mx-auto p-4">
+      <div class="inline-block bg-orange-600 text-white text-xl font-semibold rounded-lg px-3 py-2 mb-4">
+        TL;DR
+      </div>
+      <p class="text-2xl">We propose novel metrics, tasks, visualization tools and methods for “policy mobilization,” the problem of taking a non-mobile manipulation policy and finding a proper initial robot pose from which to execute it on a mobile platform.</p>
+    </div>
+  </section>
+
+  <!-- Introducing Policy Mobilization -->
+  <section class="py-24 px-6 bg-black/90 overflow-hidden">
+    <div class="max-w-5xl mx-auto text-center">
+      <p class="text-lg text-gray-400 font-semibold uppercase tracking-wide">Introducing</p>
+      <h2 class="text-6xl text-white font-bold mt-3">Policy Mobilization</h2>
+      <div class="max-w-3xl mx-auto text-justify">
+        <p class="mt-8 text-2xl text-gray-200 max-w-2xl mx-auto">Given an existing manipulation policy trained on data collected from limited viewpoints, policy mobilization aims to find an optimal robot pose in an unseen environment to successfully execute this policy.</p>
+      </div>
+    </div>
+    <div>
+      <div class="mt-12 py-8">
+        <div class="relative w-full max-w-4xl mx-auto">
+          <div id="carousel1" class="flex transition-transform duration-500 ease-in-out space-x-10">
+            <div class="flex-shrink-0 w-full px-4 slide bg-black border-2 border-white rounded-2xl relative transition-opacity duration-500" data-index="0">
+              <video src="./video/problem/door_layout1.mp4" class="w-full rounded-3xl" loop muted autoplay></video>
+              <div class="absolute top-4 left-4 bg-white/80 backdrop-blur-sm rounded-lg px-3 py-1 text-sm font-medium">With Policy Mobilization</div>
+              <div class="absolute bottom-4 left-4 w-1/5">
+                <video src="./video/problem/door_policy_3x.mp4" class="w-full rounded-xl" loop muted autoplay></video>
+                <div class="absolute bottom-2 left-2 bg-black/70 backdrop-blur-sm rounded-lg px-3 py-1 text-sm text-white font-medium"><span class="hidden md:inline">Source Policy</span><span class="inline md:hidden">π</span></div>
+              </div>
+            </div>
+            <div class="flex-shrink-0 w-full px-4 slide bg-black opacity-30 border-2 border-white rounded-2xl relative transition-opacity duration-500" data-index="1">
+              <video src="./video/problem/door_layout5.mp4" class="w-full rounded-3xl" loop muted autoplay></video>
+              <div class="absolute top-4 left-4 bg-white/80 backdrop-blur-sm rounded-lg px-3 py-1 text-sm font-medium">With Policy Mobilization</div>
+              <div class="absolute bottom-4 left-4 w-1/5">
+                <video src="./video/problem/door_policy_3x.mp4" class="w-full rounded-xl" loop muted autoplay></video>
+                <div class="absolute bottom-2 left-2 bg-black/70 backdrop-blur-sm rounded-lg px-3 py-1 text-sm text-white font-medium"><span class="hidden md:inline">Source Policy</span><span class="inline md:hidden">π</span></div>
+              </div>
+            </div>
+            <div class="flex-shrink-0 w-full px-4 slide bg-black opacity-30 border-2 border-white rounded-2xl relative transition-opacity duration-500" data-index="2">
+              <video src="./video/problem/faucet_layout0.mp4" class="w-full rounded-3xl" loop muted autoplay></video>
+              <div class="absolute top-4 left-4 bg-white/80 backdrop-blur-sm rounded-lg px-3 py-1 text-sm font-medium">With Policy Mobilization</div>
+              <div class="absolute bottom-4 left-4 w-1/5">
+                <video src="./video/problem/faucet_policy_3x.mp4" class="w-full rounded-xl" loop muted autoplay></video>
+                <div class="absolute bottom-2 left-2 bg-black/70 backdrop-blur-sm rounded-lg px-3 py-1 text-sm text-white font-medium"><span class="hidden md:inline">Source Policy</span><span class="inline md:hidden">π</span></div>
+              </div>
+            </div>
+            <div class="flex-shrink-0 w-full px-4 slide bg-black opacity-30 border-2 border-white rounded-2xl relative transition-opacity duration-500" data-index="3">
+              <video src="./video/problem/faucet_layout2.mp4" class="w-full rounded-3xl" loop muted autoplay></video>
+              <div class="absolute top-4 left-4 bg-white/80 backdrop-blur-sm rounded-lg px-3 py-1 text-sm font-medium">With Policy Mobilization</div>
+              <div class="absolute bottom-4 left-4 w-1/5">
+                <video src="./video/problem/faucet_policy_3x.mp4" class="w-full rounded-xl" loop muted autoplay></video>
+                <div class="absolute bottom-2 left-2 bg-black/70 backdrop-blur-sm rounded-lg px-3 py-1 text-sm text-white font-medium"><span class="hidden md:inline">Source Policy</span><span class="inline md:hidden">π</span></div>
+              </div>
+            </div>
+          </div>
+        </div>
+      </div>
+      <!-- Controls -->
+      <div class="mt-2 flex justify-end max-w-4xl mx-auto space-x-4">
+        <button id="prev1" class="px-5 py-3 bg-white/20 text-white rounded-full hover:bg-white/15 transition-colors duration-300"><i class="fas fa-chevron-left"></i></button>
+        <button id="next1" class="px-5 py-3 bg-white/20 text-white rounded-full hover:bg-white/15 transition-colors duration-300"><i class="fas fa-chevron-right"></i></button>
+      </div>
+    </div>
+  </section>
+
+  <!-- Highlights -->
+  <section class="py-24 px-6 bg-white">
+    <div class="max-w-3xl mx-auto text-center">
+      <p class="text-lg text-gray-600 font-semibold uppercase tracking-wide">Highlights</p>
+      <h2 class="text-6xl font-bold mt-3">What Policy Mobilization Enables</h2>
+    </div>
+    <div class="mt-12 space-y-12 px-6 max-w-6xl mx-auto">
+      <div class="text-left text-2xl font-bold">
+        <video src="./video/use_cases/drawer.mp4" class="w-full rounded-lg" loop muted autoplay></video>
+        <p class="mt-2 px-5"><span class="text-orange-600">Chaining</span> a sequence of manipulation skills in-the-wild.</p>
+      </div>
+      <div class="text-left text-2xl font-bold">
+        <video src="./video/use_cases/chips.mp4" class="w-full rounded-lg" loop muted autoplay></video>
+        <p class="mt-2 px-5">Generalizing zero-shot to <span class="text-orange-600">unseen scene layouts</span>.</p>
+      </div>
+      <div class="text-left text-2xl font-bold">
+        <video src="./video/use_cases/tomato.mp4" class="w-full rounded-lg" loop muted autoplay></video>
+        <p class="mt-2 px-5">Operating in <span class="text-orange-600">large spaces</span> that the policies have not explored during training.</p>
+      </div>
+      <div class="text-left text-2xl font-bold">
+        <video src="./video/use_cases/towel.mp4" class="w-full rounded-lg" loop muted autoplay></video>
+        <p class="mt-2 px-5">Adapting to <span class="text-orange-600">novel object heights</span>.</p>
+      </div>
+    </div>
+  </section>
+
+  <!-- Our Recipe -->
+  <section class="py-24 px-6 bg-gray-50">
+    <div class="max-w-4xl mx-auto text-center">
+      <p class="text-lg text-gray-600 font-semibold uppercase tracking-wide">How we approach policy mobilization</p>
+      <h2 class="text-6xl font-bold mt-3">Our Recipe, Simple Steps</h2>
+      <div class="max-w-3xl mx-auto text-justify">
+        <p class="mt-8 text-2xl text-gray-700">Our method for policy mobilization follows four simple steps. Provide a pre-trained robot manipulation policy with its accompanying training data. The method handles the rest.</p>
+      </div>
+    </div>
+    <div class="mt-12 grid grid-cols-1 md:grid-cols-2 gap-8 px-6 max-w-4xl mx-auto">
+      <!-- Step 1 -->
+      <div class="p-6">
+        <div class="w-12 h-12 rounded-full bg-orange-600 text-white flex items-center justify-center text-lg font-bold mb-4">1</div>
+        <h3 class="text-2xl font-semibold">Capture</h3>
+        <p class="mt-2 text-gray-800 text-lg/7">Drive the robot around to capture the test-time scene.</p>
+        <video src="./video/method/capture.mp4" class="mt-4 w-full rounded-lg" loop muted autoplay></video>
+      </div>
+      <!-- Step 2 -->
+      <div class="p-6">
+        <div class="w-12 h-12 rounded-full bg-orange-600 text-white flex items-center justify-center text-lg font-bold mb-4">2</div>
+        <h3 class="text-2xl font-semibold">Splat</h3>
+        <p class="mt-2 text-gray-800 text-lg/7">Build a 3D Gaussian Splatting model from the capture.</p>
+        <video src="./video/method/splat.mp4" class="mt-4 w-full rounded-lg" loop muted autoplay></video>
+      </div>
+      <!-- Step 3 -->
+      <div class="p-6">
+        <div class="w-12 h-12 rounded-full bg-orange-600 text-white flex items-center justify-center text-lg font-bold mb-4">3</div>
+        <h3 class="text-2xl font-semibold">Score</h3>
+        <p class="mt-2 text-gray-800 text-lg/7">Use our novel hybrid score function to rate robot poses.</p>
+        <div class="border-gray-200 border-2 rounded-lg mt-4 w-full overflow-hidden">
+          <video src="./video/method/score.mp4" class="w-full rounded-lg" loop muted autoplay></video>
+        </div>
+      </div>
+      <!-- Step 4 -->
+      <div class="p-6">
+        <div class="w-12 h-12 rounded-full bg-orange-600 text-white flex items-center justify-center text-lg font-bold mb-4">4</div>
+        <h3 class="text-2xl font-semibold">Optimize</h3>
+        <p class="mt-2 text-gray-800 text-lg/7">Find the best robot pose with sampling-based optimization.</p>
+        <video src="./video/method/optimize.mp4" class="mt-4 w-full rounded-lg" loop muted autoplay></video>
+      </div>
+    </div>
+  </section>
+
+  <!-- Real Robot Results -->
+  <section class="py-24 px-6 bg-white">
+    <div class="max-w-5xl mx-auto text-center">
+      <p class="text-lg text-gray-600 font-semibold uppercase tracking-wide">Comparisons</p>
+      <h2 class="text-6xl font-bold mt-3">Real Robot Results</h2>
+      <div class="max-w-3xl mx-auto text-justify">
+        <p class="mt-8 text-xl text-gray-700">In real experiments, we compare our method with two baselines: BC w/ Nav and a Human baseline. In the BC w/ Nav baseline, we train an end-to-end imitation learning policy from navigation and manipulation data. In the Human baseline, we verbally ask users to manually drive the robot to where they believe is the optimal starting base pose for it to execute each manipulation task successfully, without providing any information on how the policy was trained. All videos below are played at 4x playback speed.</p>
+      </div>
+    </div>
+    <div class="mt-12 max-w-6xl mx-auto">
+      <!-- Slides -->
+      <div id="robotCarousel">
+        <!-- Slide 0 -->
+        <div class="robot-slide" data-index="0">
+          <div class="max-w-6xl mx-auto flex flex-col gap-4 md:flex-row md:gap-4">
+            <div class="flex flex-col gap-4 md:w-2/5">
+              <div class="w-full relative">
+                <video src="./video/eval/tomato_human.mp4" loop muted autoplay class="rounded-lg aspect-video object-cover"></video>
+                <div class="absolute bottom-2 left-2 bg-black/70 backdrop-blur-sm rounded-lg px-4 py-2 text-white text-lg font-semibold">Human</div>
+              </div>
+              <div class="w-full relative">
+                <video src="./video/eval/tomato_ilnav.mp4" loop muted autoplay class="rounded-lg aspect-video object-cover"></video>
+                <div class="absolute bottom-2 left-2 bg-black/70 backdrop-blur-sm rounded-lg px-4 py-2 text-white text-lg font-semibold">BC w/ Nav</div>
+              </div>
+            </div>
+            <div class="md:w-3/5">
+              <div class="h-auto md:h-full relative">
+                <video src="./video/eval/tomato_mobipi.mp4" loop muted autoplay class="h-auto md:h-full rounded-lg aspect-video object-cover"></video>
+                <div class="absolute bottom-2 left-2 bg-black/70 backdrop-blur-sm rounded-lg px-4 py-2 text-white text-lg font-semibold">Ours</div>
+              </div>
+            </div>
+          </div>
+        </div>
+        <div class="robot-slide hidden" data-index="1">
+          <div class="max-w-6xl mx-auto flex flex-col gap-4 md:flex-row md:gap-4">
+            <div class="flex flex-col gap-4 md:w-2/5">
+              <div class="w-full relative">
+                <video src="./video/eval/towel_human.mp4" loop muted autoplay class="rounded-lg aspect-video object-cover"></video>
+                <div class="absolute bottom-2 left-2 bg-black/70 backdrop-blur-sm rounded-lg px-4 py-2 text-white text-lg font-semibold">Human</div>
+              </div>
+              <div class="w-full relative">
+                <video src="./video/eval/towel_ilnav.mp4" loop muted autoplay class="rounded-lg aspect-video object-cover"></video>
+                <div class="absolute bottom-2 left-2 bg-black/70 backdrop-blur-sm rounded-lg px-4 py-2 text-white text-lg font-semibold">BC w/ Nav</div>
+              </div>
+            </div>
+            <div class="md:w-3/5">
+              <div class="h-auto md:h-full relative">
+                <video src="./video/eval/towel_mobipi.mp4" loop muted autoplay class="h-auto md:h-full rounded-lg aspect-video object-cover"></video>
+                <div class="absolute bottom-2 left-2 bg-black/70 backdrop-blur-sm rounded-lg px-4 py-2 text-white text-lg font-semibold">Ours</div>
+              </div>
+            </div>
+          </div>
+        </div>
+        <div class="robot-slide hidden" data-index="2">
+          <div class="max-w-6xl mx-auto flex flex-col gap-4 md:flex-row md:gap-4">
+            <div class="flex flex-col gap-4 md:w-2/5">
+              <div class="w-full relative">
+                <video src="./video/eval/chip_human.mp4" loop muted autoplay class="rounded-lg aspect-video object-cover"></video>
+                <div class="absolute bottom-2 left-2 bg-black/70 backdrop-blur-sm rounded-lg px-4 py-2 text-white text-lg font-semibold">Human</div>
+              </div>
+              <div class="w-full relative">
+                <video src="./video/eval/chip_ilnav.mp4" loop muted autoplay class="rounded-lg aspect-video object-cover"></video>
+                <div class="absolute bottom-2 left-2 bg-black/70 backdrop-blur-sm rounded-lg px-4 py-2 text-white text-lg font-semibold">BC w/ Nav</div>
+              </div>
+            </div>
+            <div class="md:w-3/5">
+              <div class="h-auto md:h-full relative">
+                <video src="./video/eval/chip_mobipi.mp4" loop muted autoplay class="h-auto md:h-full rounded-lg aspect-video object-cover"></video>
+                <div class="absolute bottom-2 left-2 bg-black/70 backdrop-blur-sm rounded-lg px-4 py-2 text-white text-lg font-semibold">Ours</div>
+              </div>
+            </div>
+          </div>
+      </div>
+      <!-- Selector -->
+      <div class="mt-6 flex justify-center space-x-4">
+        <button class="robot-selector px-4 py-2 rounded-full text-md" data-index="0">
+          <span class="hidden md:inline">Pour Tomatoes</span>
+          <span class="inline md:hidden">Tomatoes</span>
+        </button>
+        <button class="robot-selector px-4 py-2 rounded-full text-md bg-gray-100" data-index="1">
+          <span class="hidden md:inline">Bimanual Grab Paper Towels</span>
+          <span class="inline md:hidden">Paper Towels</span>
+        </button>
+        <button class="robot-selector px-4 py-2 rounded-full text-md bg-gray-100" data-index="2">
+          <span class="hidden md:inline">Pick Chips</span>
+          <span class="inline md:hidden">Chips</span>
+        </button>
+      </div>
+    </div>
+  </section>
+
+  <!-- Mobi-π Framework -->
+  <section class="py-24 px-6" style="background-color: rgba(224, 216, 210, 0.2);">
+    <div class="max-w-4xl mx-auto text-center">
+      <p class="text-lg text-gray-600 font-semibold uppercase tracking-wide">Introducing</p>
+      <h2 class="text-6xl font-bold mt-3">The Mobi-π Framework</h2>
+      <div class="max-w-3xl mx-auto text-justify">
+        <p class="mt-8 text-2xl text-gray-700">To motivate further research on policy mobilization, we propose the Mobi-π framework:</p>
+      </div>
+    </div>
+    <div class="mt-8 grid grid-cols-1 md:grid-cols-3 gap-8 px-6 max-w-4xl mx-auto text-center">
+      <div>
+        <p class="text-6xl font-bold text-orange-600">5</p>
+        <p class="mt-2 text-xl font-bold">Simulated tasks based on RoboCasa</p>
+      </div>
+      <div>
+        <p class="text-6xl font-bold text-orange-600">3</p>
+        <p class="mt-2 text-xl font-bold">Navigation and imitation learning baselines</p>
+      </div>
+      <div>
+        <p class="text-6xl font-bold text-orange-600">2</p>
+        <p class="mt-2 text-xl font-bold">Mobilization Feasibility Metrics</p>
+      </div>
+    </div>
+    <div class="mt-12 space-y-8 px-6 max-w-4xl mx-auto text-gray-700 text-xl">
+      <div>
+        <h4 class="font-bold pb-2">Simulation Task Suite</h4>
+        <p class="">To effectively study the policy mobilization problem, we develop a suite of sim environments with RoboCasa as a benchmarking setup. We pick five single-stage manipulation tasks: Close Door, Close Drawer, Turn on Faucet, Turn on Microwave, and Turn on Stove.</p>
+      </div>
+      <div>
+        <h4 class="font-bold pb-2">Baselines</h4>
+        <p class="">We study three baselines for policy mobilization. We divide them into two categories. The first type of baselines navigates to the object of interest without considering the manipulation policy's capabilities. These methods are not policy-aware. Methods in this category include LeLaN and VLFM.
+        The second type of baselines is policy-aware and leverages large-scale data to connect navigation with manipulation. We use BC w/ Nav, a Behavior Transformer trained to jointly perform navigation and manipulation using combined demonstrations, as a representative method in this category.</p>
+      </div>
+      <div>
+        <h4 class="font-bold pb-2">Metrics</h4>
+        <p class="">We quantify how feasible a policy can be mobilized from spatial and visual perspectives. We evaluate the feasibility metrics for the simulated tasks and discuss their correlations with experimental results.</p>
+      </div>
+    </div>
+    <div class="mt-12 flex justify-center space-x-4">
+      <a href="#paper" class="flex items-center px-6 py-3 pr-5 bg-orange-600 text-white rounded-xl text-lg hover:bg-orange-700">Learn More In Our Paper <span><svg  xmlns="http://www.w3.org/2000/svg"
+       class="w-6 h-6 pt-0.5 ml-2 fill-current text-white"
+       viewBox="0 0 24 24"><path d="M18,12h0a2,2,0,0,0-.59-1.4l-4.29-4.3a1,1,0,0,0-1.41,0,1,1,0,0,0,0,1.42L15,11H5a1,1,0,0,0,0,2H15l-3.29,3.29a1,1,0,0,0,1.41,1.42l4.29-4.3A2,2,0,0,0,18,12Z"/></svg></span></a>
+    </div>
+  </section>
+  <section class="py-0 my-0">
+   <div class="w-100">
+      <video src="video/grid_animation.mp4" class="w-full aspect-auto" loop muted autoplay></video>
+    </div>
+  </section>
+
+  <!-- Team -->
+  <section class="py-24 px-6">
+    <div class="max-w-4xl mx-auto text-center">
+      <p class="text-md text-gray-600 font-semibold uppercase tracking-wide">Team</p>
+      <h2 class="text-4xl font-bold mt-2">Meet Our Team</h2>
+      <p class="mt-4 text-gray-700">This work would not be possible without the awesome team.<br/>Jingyun completed this work during an internship with Toyota Research Institute.<br/>* Isabella and Brandon contributed equally.</p>
+    </div>
+    <div class="mt-12 grid grid-cols-2 sm:grid-cols-3 lg:grid-cols-3 gap-8 px-6 max-w-4xl mx-auto">
+      <!-- Six member cards -->
+      <div class="text-center">
+        <img src="./images/team/jingyun.jpg" alt="Member" class="w-32 h-32 rounded-2xl mx-auto">
+        <p class="mt-4 font-bold">Jingyun Yang</p>
+        <p class="text-sm text-gray-500">Stanford University</p>
+        <div class="mt-2 flex justify-center space-x-6 text-gray-500">
+          <a href="https://yjy0625.github.io/" class="hover:text-black">
+            <!-- Globe Icon -->
+            <svg xmlns="http://www.w3.org/2000/svg" class="h-5 w-5" fill="currentColor" viewBox="0 0 24 24">
+              <path d="m10.963 17.822c-3.536 3.384-4.873 2.047-5.849 1.069-1.068-1.069-2.397-2.399 1.382-6.183 1.644-1.646 3.019-2.481 4.088-2.481.423 0 1.1.114 2.082 1.097.585.586 1.535.587 2.122.001.586-.585.587-1.535.001-2.122-3.029-3.033-6.393-2.644-10.416 1.384-3.967 3.974-4.419 7.384-1.382 10.425 1.325 1.327 2.716 1.99 4.192 1.99 1.814 0 3.755-1.003 5.854-3.013.599-.573.619-1.522.046-2.121-.574-.599-1.523-.62-2.121-.046z"/><path d="m21.008 2.977c-2.952-2.955-6.237-2.621-10.045 1.021-.599.573-.62 1.522-.047 2.121s1.522.619 2.121.047c3.537-3.383 4.873-2.046 5.849-1.07 1.067 1.07 2.396 2.4-1.382 6.184-1.651 1.654-3.026 2.492-4.086 2.492-.419 0-1.092-.115-2.083-1.108-.586-.587-1.536-.587-2.122-.001-.586.585-.587 1.535-.001 2.122 1.336 1.338 2.712 1.988 4.207 1.988 1.938 0 3.912-1.072 6.209-3.372 3.967-3.973 4.419-7.382 1.382-10.424z"/>
+            </svg>
+          </a>
+          <a href="https://x.com/yjy0625" class="hover:text-black">
+            <!-- Twitter Icon -->
+            <svg xmlns="http://www.w3.org/2000/svg" class="h-5 w-5" fill="currentColor" viewBox="0 0 24 24">
+              <path id="Logo_00000038394049246713568260000012923108920998390947_" d="M21.543,7.104c0.014,0.211,0.014,0.423,0.014,0.636  c0,6.507-4.954,14.01-14.01,14.01v-0.004C4.872,21.75,2.252,20.984,0,19.539c0.389,0.047,0.78,0.07,1.172,0.071  c2.218,0.002,4.372-0.742,6.115-2.112c-2.107-0.04-3.955-1.414-4.6-3.42c0.738,0.142,1.498,0.113,2.223-0.084  c-2.298-0.464-3.95-2.483-3.95-4.827c0-0.021,0-0.042,0-0.062c0.685,0.382,1.451,0.593,2.235,0.616  C1.031,8.276,0.363,5.398,1.67,3.148c2.5,3.076,6.189,4.946,10.148,5.145c-0.397-1.71,0.146-3.502,1.424-4.705  c1.983-1.865,5.102-1.769,6.967,0.214c1.103-0.217,2.16-0.622,3.127-1.195c-0.368,1.14-1.137,2.108-2.165,2.724  C22.148,5.214,23.101,4.953,24,4.555C23.339,5.544,22.507,6.407,21.543,7.104z"/>
+            </svg>
+          </a>
+          <a href="https://www.linkedin.com/in/yjy0625/" class="hover:text-black">
+            <!-- LinkedIn Icon -->
+            <svg xmlns="http://www.w3.org/2000/svg" class="h-5 w-5" fill="currentColor" viewBox="0 0 24 24">
+              <g>
+                <path id="Path_2525" d="M23.002,21.584h0.227l-0.435-0.658l0,0c0.266,0,0.407-0.169,0.409-0.376c0-0.008,0-0.017-0.001-0.025   c0-0.282-0.17-0.417-0.519-0.417h-0.564v1.476h0.212v-0.643h0.261L23.002,21.584z M22.577,20.774h-0.246v-0.499h0.312   c0.161,0,0.345,0.026,0.345,0.237c0,0.242-0.186,0.262-0.412,0.262"/>
+                <path id="Path_2520" d="M17.291,19.073h-3.007v-4.709c0-1.123-0.02-2.568-1.564-2.568c-1.566,0-1.806,1.223-1.806,2.487v4.79H7.908   V9.389h2.887v1.323h0.04c0.589-1.006,1.683-1.607,2.848-1.564c3.048,0,3.609,2.005,3.609,4.612L17.291,19.073z M4.515,8.065   c-0.964,0-1.745-0.781-1.745-1.745c0-0.964,0.781-1.745,1.745-1.745c0.964,0,1.745,0.781,1.745,1.745   C6.26,7.284,5.479,8.065,4.515,8.065L4.515,8.065 M6.018,19.073h-3.01V9.389h3.01V19.073z M18.79,1.783H1.497   C0.68,1.774,0.01,2.429,0,3.246V20.61c0.01,0.818,0.68,1.473,1.497,1.464H18.79c0.819,0.01,1.492-0.645,1.503-1.464V3.245   c-0.012-0.819-0.685-1.474-1.503-1.463"/>
+                <path id="Path_2526" d="M22.603,19.451c-0.764,0.007-1.378,0.633-1.37,1.397c0.007,0.764,0.633,1.378,1.397,1.37   c0.764-0.007,1.378-0.633,1.37-1.397c-0.007-0.754-0.617-1.363-1.37-1.37H22.603 M22.635,22.059   c-0.67,0.011-1.254-0.522-1.265-1.192c-0.011-0.67,0.523-1.222,1.193-1.233c0.67-0.011,1.222,0.523,1.233,1.193   c0,0.007,0,0.013,0,0.02C23.81,21.502,23.29,22.045,22.635,22.059h-0.031"/>
+              </g>
+            </svg>
+          </a>
+        </div>
+      </div>
+      <div class="text-center">
+        <img src="./images/team/isabella.jpg" alt="Member" class="w-32 h-32 rounded-2xl mx-auto">
+        <p class="mt-4 font-bold">Isabella Huang*</p>
+        <p class="text-sm text-gray-500">Toyota Research Institute</p>
+        <div class="mt-2 flex justify-center space-x-6 text-gray-500">
+          <a href="https://scholar.google.com/citations?user=04Ta98kAAAAJ&hl=en" class="hover:text-black">
+            <!-- Globe Icon -->
+            <svg xmlns="http://www.w3.org/2000/svg" class="h-5 w-5" fill="currentColor" viewBox="0 0 24 24">
+              <path d="m10.963 17.822c-3.536 3.384-4.873 2.047-5.849 1.069-1.068-1.069-2.397-2.399 1.382-6.183 1.644-1.646 3.019-2.481 4.088-2.481.423 0 1.1.114 2.082 1.097.585.586 1.535.587 2.122.001.586-.585.587-1.535.001-2.122-3.029-3.033-6.393-2.644-10.416 1.384-3.967 3.974-4.419 7.384-1.382 10.425 1.325 1.327 2.716 1.99 4.192 1.99 1.814 0 3.755-1.003 5.854-3.013.599-.573.619-1.522.046-2.121-.574-.599-1.523-.62-2.121-.046z"/><path d="m21.008 2.977c-2.952-2.955-6.237-2.621-10.045 1.021-.599.573-.62 1.522-.047 2.121s1.522.619 2.121.047c3.537-3.383 4.873-2.046 5.849-1.07 1.067 1.07 2.396 2.4-1.382 6.184-1.651 1.654-3.026 2.492-4.086 2.492-.419 0-1.092-.115-2.083-1.108-.586-.587-1.536-.587-2.122-.001-.586.585-.587 1.535-.001 2.122 1.336 1.338 2.712 1.988 4.207 1.988 1.938 0 3.912-1.072 6.209-3.372 3.967-3.973 4.419-7.382 1.382-10.424z"/>
+            </svg>
+          </a>
+        </div>
+      </div>
+      <div class="text-center">
+        <img src="./images/team/brandon.jpg" alt="Member" class="w-32 h-32 rounded-2xl mx-auto">
+        <p class="mt-4 font-bold">Brandon Vu*</p>
+        <p class="text-sm text-gray-500">Stanford University</p>
+        <div class="mt-2 flex justify-center space-x-6 text-gray-500">
+          <a href="https://x.com/brandontvu" class="hover:text-black">
+            <!-- Twitter Icon -->
+            <svg xmlns="http://www.w3.org/2000/svg" class="h-5 w-5" fill="currentColor" viewBox="0 0 24 24">
+              <path id="Logo_00000038394049246713568260000012923108920998390947_" d="M21.543,7.104c0.014,0.211,0.014,0.423,0.014,0.636  c0,6.507-4.954,14.01-14.01,14.01v-0.004C4.872,21.75,2.252,20.984,0,19.539c0.389,0.047,0.78,0.07,1.172,0.071  c2.218,0.002,4.372-0.742,6.115-2.112c-2.107-0.04-3.955-1.414-4.6-3.42c0.738,0.142,1.498,0.113,2.223-0.084  c-2.298-0.464-3.95-2.483-3.95-4.827c0-0.021,0-0.042,0-0.062c0.685,0.382,1.451,0.593,2.235,0.616  C1.031,8.276,0.363,5.398,1.67,3.148c2.5,3.076,6.189,4.946,10.148,5.145c-0.397-1.71,0.146-3.502,1.424-4.705  c1.983-1.865,5.102-1.769,6.967,0.214c1.103-0.217,2.16-0.622,3.127-1.195c-0.368,1.14-1.137,2.108-2.165,2.724  C22.148,5.214,23.101,4.953,24,4.555C23.339,5.544,22.507,6.407,21.543,7.104z"/>
+            </svg>
+          </a>
+          <a href="https://www.linkedin.com/in/brandon-t-vu/" class="hover:text-black">
+            <!-- LinkedIn Icon -->
+            <svg xmlns="http://www.w3.org/2000/svg" class="h-5 w-5" fill="currentColor" viewBox="0 0 24 24">
+              <g>
+                <path id="Path_2525" d="M23.002,21.584h0.227l-0.435-0.658l0,0c0.266,0,0.407-0.169,0.409-0.376c0-0.008,0-0.017-0.001-0.025   c0-0.282-0.17-0.417-0.519-0.417h-0.564v1.476h0.212v-0.643h0.261L23.002,21.584z M22.577,20.774h-0.246v-0.499h0.312   c0.161,0,0.345,0.026,0.345,0.237c0,0.242-0.186,0.262-0.412,0.262"/>
+                <path id="Path_2520" d="M17.291,19.073h-3.007v-4.709c0-1.123-0.02-2.568-1.564-2.568c-1.566,0-1.806,1.223-1.806,2.487v4.79H7.908   V9.389h2.887v1.323h0.04c0.589-1.006,1.683-1.607,2.848-1.564c3.048,0,3.609,2.005,3.609,4.612L17.291,19.073z M4.515,8.065   c-0.964,0-1.745-0.781-1.745-1.745c0-0.964,0.781-1.745,1.745-1.745c0.964,0,1.745,0.781,1.745,1.745   C6.26,7.284,5.479,8.065,4.515,8.065L4.515,8.065 M6.018,19.073h-3.01V9.389h3.01V19.073z M18.79,1.783H1.497   C0.68,1.774,0.01,2.429,0,3.246V20.61c0.01,0.818,0.68,1.473,1.497,1.464H18.79c0.819,0.01,1.492-0.645,1.503-1.464V3.245   c-0.012-0.819-0.685-1.474-1.503-1.463"/>
+                <path id="Path_2526" d="M22.603,19.451c-0.764,0.007-1.378,0.633-1.37,1.397c0.007,0.764,0.633,1.378,1.397,1.37   c0.764-0.007,1.378-0.633,1.37-1.397c-0.007-0.754-0.617-1.363-1.37-1.37H22.603 M22.635,22.059   c-0.67,0.011-1.254-0.522-1.265-1.192c-0.011-0.67,0.523-1.222,1.193-1.233c0.67-0.011,1.222,0.523,1.233,1.193   c0,0.007,0,0.013,0,0.02C23.81,21.502,23.29,22.045,22.635,22.059h-0.031"/>
+              </g>
+            </svg>
+          </a>
+        </div>
+      </div>
+      <div class="text-center">
+        <img src="./images/team/max.jpg" alt="Member" class="w-32 h-32 rounded-2xl mx-auto object-cover object-top">
+        <p class="mt-4 font-bold">Max Bajracharya</p>
+        <p class="text-sm text-gray-500">Toyota Research Institute</p>
+        <div class="mt-2 flex justify-center space-x-6 text-gray-500">
+          <a href="https://www.tri.global/about-us/max-bajracharya" class="hover:text-black">
+            <!-- Globe Icon -->
+            <svg xmlns="http://www.w3.org/2000/svg" class="h-5 w-5" fill="currentColor" viewBox="0 0 24 24">
+              <path d="m10.963 17.822c-3.536 3.384-4.873 2.047-5.849 1.069-1.068-1.069-2.397-2.399 1.382-6.183 1.644-1.646 3.019-2.481 4.088-2.481.423 0 1.1.114 2.082 1.097.585.586 1.535.587 2.122.001.586-.585.587-1.535.001-2.122-3.029-3.033-6.393-2.644-10.416 1.384-3.967 3.974-4.419 7.384-1.382 10.425 1.325 1.327 2.716 1.99 4.192 1.99 1.814 0 3.755-1.003 5.854-3.013.599-.573.619-1.522.046-2.121-.574-.599-1.523-.62-2.121-.046z"/><path d="m21.008 2.977c-2.952-2.955-6.237-2.621-10.045 1.021-.599.573-.62 1.522-.047 2.121s1.522.619 2.121.047c3.537-3.383 4.873-2.046 5.849-1.07 1.067 1.07 2.396 2.4-1.382 6.184-1.651 1.654-3.026 2.492-4.086 2.492-.419 0-1.092-.115-2.083-1.108-.586-.587-1.536-.587-2.122-.001-.586.585-.587 1.535-.001 2.122 1.336 1.338 2.712 1.988 4.207 1.988 1.938 0 3.912-1.072 6.209-3.372 3.967-3.973 4.419-7.382 1.382-10.424z"/>
+            </svg>
+          </a>
+          <a href="https://www.linkedin.com/in/max-bajracharya-a6b1064/" class="hover:text-black">
+            <!-- LinkedIn Icon -->
+            <svg xmlns="http://www.w3.org/2000/svg" class="h-5 w-5" fill="currentColor" viewBox="0 0 24 24">
+              <g>
+                <path id="Path_2525" d="M23.002,21.584h0.227l-0.435-0.658l0,0c0.266,0,0.407-0.169,0.409-0.376c0-0.008,0-0.017-0.001-0.025   c0-0.282-0.17-0.417-0.519-0.417h-0.564v1.476h0.212v-0.643h0.261L23.002,21.584z M22.577,20.774h-0.246v-0.499h0.312   c0.161,0,0.345,0.026,0.345,0.237c0,0.242-0.186,0.262-0.412,0.262"/>
+                <path id="Path_2520" d="M17.291,19.073h-3.007v-4.709c0-1.123-0.02-2.568-1.564-2.568c-1.566,0-1.806,1.223-1.806,2.487v4.79H7.908   V9.389h2.887v1.323h0.04c0.589-1.006,1.683-1.607,2.848-1.564c3.048,0,3.609,2.005,3.609,4.612L17.291,19.073z M4.515,8.065   c-0.964,0-1.745-0.781-1.745-1.745c0-0.964,0.781-1.745,1.745-1.745c0.964,0,1.745,0.781,1.745,1.745   C6.26,7.284,5.479,8.065,4.515,8.065L4.515,8.065 M6.018,19.073h-3.01V9.389h3.01V19.073z M18.79,1.783H1.497   C0.68,1.774,0.01,2.429,0,3.246V20.61c0.01,0.818,0.68,1.473,1.497,1.464H18.79c0.819,0.01,1.492-0.645,1.503-1.464V3.245   c-0.012-0.819-0.685-1.474-1.503-1.463"/>
+                <path id="Path_2526" d="M22.603,19.451c-0.764,0.007-1.378,0.633-1.37,1.397c0.007,0.764,0.633,1.378,1.397,1.37   c0.764-0.007,1.378-0.633,1.37-1.397c-0.007-0.754-0.617-1.363-1.37-1.37H22.603 M22.635,22.059   c-0.67,0.011-1.254-0.522-1.265-1.192c-0.011-0.67,0.523-1.222,1.193-1.233c0.67-0.011,1.222,0.523,1.233,1.193   c0,0.007,0,0.013,0,0.02C23.81,21.502,23.29,22.045,22.635,22.059h-0.031"/>
+              </g>
+            </svg>
+          </a>
+        </div>
+      </div>
+      <div class="text-center">
+        <img src="./images/team/rika.jpg" alt="Member" class="w-32 h-32 rounded-2xl mx-auto">
+        <p class="mt-4 font-bold">Rika Antonova</p>
+        <p class="text-sm text-gray-500">University of Cambridge</p>
+        <div class="mt-2 flex justify-center space-x-6 text-gray-500">
+          <a href="https://contactrika.github.io/" class="hover:text-black">
+            <!-- Globe Icon -->
+            <svg xmlns="http://www.w3.org/2000/svg" class="h-5 w-5" fill="currentColor" viewBox="0 0 24 24">
+              <path d="m10.963 17.822c-3.536 3.384-4.873 2.047-5.849 1.069-1.068-1.069-2.397-2.399 1.382-6.183 1.644-1.646 3.019-2.481 4.088-2.481.423 0 1.1.114 2.082 1.097.585.586 1.535.587 2.122.001.586-.585.587-1.535.001-2.122-3.029-3.033-6.393-2.644-10.416 1.384-3.967 3.974-4.419 7.384-1.382 10.425 1.325 1.327 2.716 1.99 4.192 1.99 1.814 0 3.755-1.003 5.854-3.013.599-.573.619-1.522.046-2.121-.574-.599-1.523-.62-2.121-.046z"/><path d="m21.008 2.977c-2.952-2.955-6.237-2.621-10.045 1.021-.599.573-.62 1.522-.047 2.121s1.522.619 2.121.047c3.537-3.383 4.873-2.046 5.849-1.07 1.067 1.07 2.396 2.4-1.382 6.184-1.651 1.654-3.026 2.492-4.086 2.492-.419 0-1.092-.115-2.083-1.108-.586-.587-1.536-.587-2.122-.001-.586.585-.587 1.535-.001 2.122 1.336 1.338 2.712 1.988 4.207 1.988 1.938 0 3.912-1.072 6.209-3.372 3.967-3.973 4.419-7.382 1.382-10.424z"/>
+            </svg>
+          </a>
+          <a href="https://x.com/contactrika" class="hover:text-black">
+            <!-- Twitter Icon -->
+            <svg xmlns="http://www.w3.org/2000/svg" class="h-5 w-5" fill="currentColor" viewBox="0 0 24 24">
+              <path id="Logo_00000038394049246713568260000012923108920998390947_" d="M21.543,7.104c0.014,0.211,0.014,0.423,0.014,0.636  c0,6.507-4.954,14.01-14.01,14.01v-0.004C4.872,21.75,2.252,20.984,0,19.539c0.389,0.047,0.78,0.07,1.172,0.071  c2.218,0.002,4.372-0.742,6.115-2.112c-2.107-0.04-3.955-1.414-4.6-3.42c0.738,0.142,1.498,0.113,2.223-0.084  c-2.298-0.464-3.95-2.483-3.95-4.827c0-0.021,0-0.042,0-0.062c0.685,0.382,1.451,0.593,2.235,0.616  C1.031,8.276,0.363,5.398,1.67,3.148c2.5,3.076,6.189,4.946,10.148,5.145c-0.397-1.71,0.146-3.502,1.424-4.705  c1.983-1.865,5.102-1.769,6.967,0.214c1.103-0.217,2.16-0.622,3.127-1.195c-0.368,1.14-1.137,2.108-2.165,2.724  C22.148,5.214,23.101,4.953,24,4.555C23.339,5.544,22.507,6.407,21.543,7.104z"/>
+            </svg>
+          </a>
+          <a href="https://www.linkedin.com/in/contactrika/" class="hover:text-black">
+            <!-- LinkedIn Icon -->
+            <svg xmlns="http://www.w3.org/2000/svg" class="h-5 w-5" fill="currentColor" viewBox="0 0 24 24">
+              <g>
+                <path id="Path_2525" d="M23.002,21.584h0.227l-0.435-0.658l0,0c0.266,0,0.407-0.169,0.409-0.376c0-0.008,0-0.017-0.001-0.025   c0-0.282-0.17-0.417-0.519-0.417h-0.564v1.476h0.212v-0.643h0.261L23.002,21.584z M22.577,20.774h-0.246v-0.499h0.312   c0.161,0,0.345,0.026,0.345,0.237c0,0.242-0.186,0.262-0.412,0.262"/>
+                <path id="Path_2520" d="M17.291,19.073h-3.007v-4.709c0-1.123-0.02-2.568-1.564-2.568c-1.566,0-1.806,1.223-1.806,2.487v4.79H7.908   V9.389h2.887v1.323h0.04c0.589-1.006,1.683-1.607,2.848-1.564c3.048,0,3.609,2.005,3.609,4.612L17.291,19.073z M4.515,8.065   c-0.964,0-1.745-0.781-1.745-1.745c0-0.964,0.781-1.745,1.745-1.745c0.964,0,1.745,0.781,1.745,1.745   C6.26,7.284,5.479,8.065,4.515,8.065L4.515,8.065 M6.018,19.073h-3.01V9.389h3.01V19.073z M18.79,1.783H1.497   C0.68,1.774,0.01,2.429,0,3.246V20.61c0.01,0.818,0.68,1.473,1.497,1.464H18.79c0.819,0.01,1.492-0.645,1.503-1.464V3.245   c-0.012-0.819-0.685-1.474-1.503-1.463"/>
+                <path id="Path_2526" d="M22.603,19.451c-0.764,0.007-1.378,0.633-1.37,1.397c0.007,0.764,0.633,1.378,1.397,1.37   c0.764-0.007,1.378-0.633,1.37-1.397c-0.007-0.754-0.617-1.363-1.37-1.37H22.603 M22.635,22.059   c-0.67,0.011-1.254-0.522-1.265-1.192c-0.011-0.67,0.523-1.222,1.193-1.233c0.67-0.011,1.222,0.523,1.233,1.193   c0,0.007,0,0.013,0,0.02C23.81,21.502,23.29,22.045,22.635,22.059h-0.031"/>
+              </g>
+            </svg>
+          </a>
+        </div>
+      </div>
+      <div class="text-center">
+        <img src="./images/team/jeannette.jpg" alt="Member" class="w-32 h-32 rounded-2xl mx-auto object-cover object-center">
+        <p class="mt-4 font-bold">Jeannette Bohg</p>
+        <p class="text-sm text-gray-500">Stanford University</p>
+        <div class="mt-2 flex justify-center space-x-6 text-gray-500">
+          <a href="https://web.stanford.edu/~bohg/" class="hover:text-black">
+            <!-- Globe Icon -->
+            <svg xmlns="http://www.w3.org/2000/svg" class="h-5 w-5" fill="currentColor" viewBox="0 0 24 24">
+              <path d="m10.963 17.822c-3.536 3.384-4.873 2.047-5.849 1.069-1.068-1.069-2.397-2.399 1.382-6.183 1.644-1.646 3.019-2.481 4.088-2.481.423 0 1.1.114 2.082 1.097.585.586 1.535.587 2.122.001.586-.585.587-1.535.001-2.122-3.029-3.033-6.393-2.644-10.416 1.384-3.967 3.974-4.419 7.384-1.382 10.425 1.325 1.327 2.716 1.99 4.192 1.99 1.814 0 3.755-1.003 5.854-3.013.599-.573.619-1.522.046-2.121-.574-.599-1.523-.62-2.121-.046z"/><path d="m21.008 2.977c-2.952-2.955-6.237-2.621-10.045 1.021-.599.573-.62 1.522-.047 2.121s1.522.619 2.121.047c3.537-3.383 4.873-2.046 5.849-1.07 1.067 1.07 2.396 2.4-1.382 6.184-1.651 1.654-3.026 2.492-4.086 2.492-.419 0-1.092-.115-2.083-1.108-.586-.587-1.536-.587-2.122-.001-.586.585-.587 1.535-.001 2.122 1.336 1.338 2.712 1.988 4.207 1.988 1.938 0 3.912-1.072 6.209-3.372 3.967-3.973 4.419-7.382 1.382-10.424z"/>
+            </svg>
+          </a>
+          <a href="https://x.com/leto__jean" class="hover:text-black">
+            <!-- Twitter Icon -->
+            <svg xmlns="http://www.w3.org/2000/svg" class="h-5 w-5" fill="currentColor" viewBox="0 0 24 24">
+              <path id="Logo_00000038394049246713568260000012923108920998390947_" d="M21.543,7.104c0.014,0.211,0.014,0.423,0.014,0.636  c0,6.507-4.954,14.01-14.01,14.01v-0.004C4.872,21.75,2.252,20.984,0,19.539c0.389,0.047,0.78,0.07,1.172,0.071  c2.218,0.002,4.372-0.742,6.115-2.112c-2.107-0.04-3.955-1.414-4.6-3.42c0.738,0.142,1.498,0.113,2.223-0.084  c-2.298-0.464-3.95-2.483-3.95-4.827c0-0.021,0-0.042,0-0.062c0.685,0.382,1.451,0.593,2.235,0.616  C1.031,8.276,0.363,5.398,1.67,3.148c2.5,3.076,6.189,4.946,10.148,5.145c-0.397-1.71,0.146-3.502,1.424-4.705  c1.983-1.865,5.102-1.769,6.967,0.214c1.103-0.217,2.16-0.622,3.127-1.195c-0.368,1.14-1.137,2.108-2.165,2.724  C22.148,5.214,23.101,4.953,24,4.555C23.339,5.544,22.507,6.407,21.543,7.104z"/>
+            </svg>
+          </a>
+          <a href="https://www.linkedin.com/in/jeannette-bohg-95baa143/" class="hover:text-black">
+            <!-- LinkedIn Icon -->
+            <svg xmlns="http://www.w3.org/2000/svg" class="h-5 w-5" fill="currentColor" viewBox="0 0 24 24">
+              <g>
+                <path id="Path_2525" d="M23.002,21.584h0.227l-0.435-0.658l0,0c0.266,0,0.407-0.169,0.409-0.376c0-0.008,0-0.017-0.001-0.025   c0-0.282-0.17-0.417-0.519-0.417h-0.564v1.476h0.212v-0.643h0.261L23.002,21.584z M22.577,20.774h-0.246v-0.499h0.312   c0.161,0,0.345,0.026,0.345,0.237c0,0.242-0.186,0.262-0.412,0.262"/>
+                <path id="Path_2520" d="M17.291,19.073h-3.007v-4.709c0-1.123-0.02-2.568-1.564-2.568c-1.566,0-1.806,1.223-1.806,2.487v4.79H7.908   V9.389h2.887v1.323h0.04c0.589-1.006,1.683-1.607,2.848-1.564c3.048,0,3.609,2.005,3.609,4.612L17.291,19.073z M4.515,8.065   c-0.964,0-1.745-0.781-1.745-1.745c0-0.964,0.781-1.745,1.745-1.745c0.964,0,1.745,0.781,1.745,1.745   C6.26,7.284,5.479,8.065,4.515,8.065L4.515,8.065 M6.018,19.073h-3.01V9.389h3.01V19.073z M18.79,1.783H1.497   C0.68,1.774,0.01,2.429,0,3.246V20.61c0.01,0.818,0.68,1.473,1.497,1.464H18.79c0.819,0.01,1.492-0.645,1.503-1.464V3.245   c-0.012-0.819-0.685-1.474-1.503-1.463"/>
+                <path id="Path_2526" d="M22.603,19.451c-0.764,0.007-1.378,0.633-1.37,1.397c0.007,0.764,0.633,1.378,1.397,1.37   c0.764-0.007,1.378-0.633,1.37-1.397c-0.007-0.754-0.617-1.363-1.37-1.37H22.603 M22.635,22.059   c-0.67,0.011-1.254-0.522-1.265-1.192c-0.011-0.67,0.523-1.222,1.193-1.233c0.67-0.011,1.222,0.523,1.233,1.193   c0,0.007,0,0.013,0,0.02C23.81,21.502,23.29,22.045,22.635,22.059h-0.031"/>
+              </g>
+            </svg>
+          </a>
+        </div>
+      </div>
+      <!-- Repeat for members 2-6 -->
+    </div>
+  </section>
+
+  <!-- FAQ -->
+  <section class="py-8 px-6 bg-white">
+    <div class="max-w-3xl mx-auto text-center">
+      <p class="text-md text-gray-600 font-semibold uppercase tracking-wide">FAQ</p>
+      <h2 class="text-4xl font-bold mt-2">Question? Answers</h2>
+    </div>
+    <div id="faq" class="mt-6 max-w-3xl mx-auto divide-y divide-gray-300">
+      <details open class="group">
+        <summary class="flex justify-between items-center p-4 cursor-pointer bg-white select-none">
+          <span class="text-lg font-semibold text-gray-900 pr-6">Why should I care about policy mobilization? Why not simply train a mobile manipulation policy from a large dataset?</span>
+          <svg class="w-5 h-5 text-gray-500" xmlns="http://www.w3.org/2000/svg" fill="none"
+               viewBox="0 0 24 24" stroke="currentColor">
+            <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2"
+                  d="M19 9l-7 7-7-7" />
+          </svg>
+        </summary>
+        <div class="px-4 pb-4 overflow-hidden transition-all duration-300 ease-in-out">
+          <p class="text-gray-700 text-lg">
+            Indeed, one approach to learning mobile manipulation is to train a policy from a dataset that includes both navigation and manipulation data. However, training such a policy typically requires large amounts of training data, since the policy needs to not only generalize to different navigation and manipulation scenarios but also seamlessly coordinate navigation and manipulation. We showed in our simulation experiments that an imitation learning baseline that learns an end-to-end policy for navigation and manipulation fails to perform well in unseen room layouts despite learning from 5x more training data. Compared to training an end-to-end mobile manipulation policy, our policy mobilization framework provides a more data-efficient approach to learning mobile manipulation.
+          </p>
+        </div>
+      </details>
+
+      <details class="group">
+        <summary class="flex justify-between items-center p-4 cursor-pointer bg-white select-none">
+          <span class="text-lg font-semibold text-gray-900 pr-6">Why not train a mobile manipulation policy in simulation and transfer to the real world?</span>
+          <svg class="w-5 h-5 text-gray-500" xmlns="http://www.w3.org/2000/svg" fill="none"
+               viewBox="0 0 24 24" stroke="currentColor">
+            <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2"
+                  d="M19 9l-7 7-7-7" />
+          </svg>
+        </summary>
+        <div class="px-4 pb-4 overflow-hidden transition-all duration-300 ease-in-out">
+          <p class="text-gray-700 text-lg">
+            Training a mobile manipulation policy in simulation from 3DGS requires creating an interactive and physically accurate simulation from the 3DGS model, which is an unsolved problem.
+          </p>
+        </div>
+      </details>
+
+      <details class="group">
+        <summary class="flex justify-between items-center p-4 cursor-pointer bg-white select-none">
+          <span class="text-lg font-semibold text-gray-900 pr-6">How does the approach handle distractors?</span>
+          <svg class="w-5 h-5 text-gray-500" xmlns="http://www.w3.org/2000/svg" fill="none"
+               viewBox="0 0 24 24" stroke="currentColor">
+            <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2"
+                  d="M19 9l-7 7-7-7" />
+          </svg>
+        </summary>
+        <div class="px-4 pb-4 overflow-hidden transition-all duration-300 ease-in-out">
+          <p class="text-gray-700 text-lg">
+            Our sim setup includes unseen test objects. We find that our method, which utilizes DINO dense descriptors to score robot poses, is capable of ignoring these irrelevant objects.
+          </p>
+        </div>
+      </details>
+
+      <details class="group">
+        <summary class="flex justify-between items-center p-4 cursor-pointer bg-white select-none">
+          <span class="text-lg font-semibold text-gray-900 pr-6">Can the method handle imperfect scene reconstruction?</span>
+          <svg class="w-5 h-5 text-gray-500" xmlns="http://www.w3.org/2000/svg" fill="none"
+               viewBox="0 0 24 24" stroke="currentColor">
+            <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2"
+                  d="M19 9l-7 7-7-7" />
+          </svg>
+        </summary>
+        <div class="px-4 pb-4 overflow-hidden transition-all duration-300 ease-in-out">
+          <p class="text-gray-700 text-lg">
+            Yes. Our learned 3DGS models have artifacts and surface color inconsistencies, yet the method still performs well.
+          </p>
+        </div>
+      </details>
+
+      <details class="group">
+        <summary class="flex justify-between items-center p-4 cursor-pointer bg-white select-none">
+          <span class="text-lg font-semibold text-gray-900 pr-6">I have other questions. How can I get an answer?</span>
+          <svg class="w-5 h-5 text-gray-500" xmlns="http://www.w3.org/2000/svg" fill="none"
+               viewBox="0 0 24 24" stroke="currentColor">
+            <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2"
+                  d="M19 9l-7 7-7-7" />
+          </svg>
+        </summary>
+        <div class="px-4 pb-4 overflow-hidden transition-all duration-300 ease-in-out">
+          <p class="text-gray-700 text-lg">
+            Please try to first find answers in our paper and supplementary materials. If you still cannot find an answer, you are welcome to contact us via email.
+          </p>
+        </div>
+      </details>
+    </div>
+  </section>
+
+  <!-- Cite Us -->
+  <section id="bibtex" class="py-24 px-6">
+    <div class="max-w-3xl mx-auto text-center">
+      <p class="text-md text-gray-600 font-semibold uppercase tracking-wide">Found our work useful?</p>
+      <h2 class="text-4xl font-bold mt-2">Cite Us</h2>
+      <pre class="mt-6 bg-gray-100 p-6 rounded-lg text-left overflow-auto text-sm">@inproceedings{yang2025mobipi,
+  title={Mobi-$\pi$: Mobilizing Your Robot Learning Policy},
+  author={Yang, Jingyun and Huang, Isabella and Vu, Brandon and Bajracharya, Max and Antonova, Rika and Bohg, Jeannette},
+  booktitle={ArXiv},
+  year={2025}
+}</pre>
+    </div>
+  </section>
+
+  <!-- Footer -->
+  <footer class="bg-white border-t py-6 px-6 text-center text-sm text-gray-500">
+    <p>&copy; 2025 Mobi-π. All rights reserved.</p>
+    <p>Contact: <a href="mailto:jingyuny@stanford.edu" class="underline">jingyuny@stanford.edu</a></p>
+  </footer>
+
+  <!-- Scripts for Carousels -->
+  <script>
+    document.addEventListener('DOMContentLoaded', function() {
+      const carousel = document.getElementById('carousel1');
+      const slides = Array.from(carousel.querySelectorAll('.slide'));
+      const container = carousel.parentElement;
+      let current = 0;
+
+      function updateCarousel() {
+        const slideWidth = slides[0].offsetWidth;
+        // get horizontal gap by reading margin-left of second slide
+        const slideMargin = parseFloat(getComputedStyle(slides[1]).marginLeft) || 0;
+        const containerWidth = container.clientWidth;
+        // total offset to center current slide
+        const centerOffset = (containerWidth - slideWidth) / 2;
+        const targetPos = current * (slideWidth + slideMargin);
+        const translateX = -(targetPos - centerOffset);
+        carousel.style.transform = `translateX(${translateX}px)`;
+        slides.forEach(slide => {
+          const idx = parseInt(slide.dataset.index);
+          slide.style.opacity = idx === current ? '1' : '0.5';
+        });
+      }
+
+      document.getElementById('prev1').addEventListener('click', () => {
+        current = (current - 1 + slides.length) % slides.length;
+        updateCarousel();
+      });
+      document.getElementById('next1').addEventListener('click', () => {
+        current = (current + 1) % slides.length;
+        updateCarousel();
+      });
+
+      updateCarousel();
+      window.addEventListener('resize', updateCarousel);
+
+      // Carousel 2 with pills
+      const robotSlides = document.querySelectorAll('.robot-slide');
+      const robotButtons = document.querySelectorAll('.robot-selector');
+      robotButtons.forEach(btn => {
+        btn.addEventListener('click', () => {
+          const idx = btn.dataset.index;
+          robotSlides.forEach(sl => sl.classList.add('hidden'));
+          document.querySelector(`.robot-slide[data-index=\"${idx}\"]`).classList.remove('hidden');
+          robotButtons.forEach(b => {
+            b.classList.remove('bg-orange-600','text-white')
+            b.classList.add('bg-gray-100');
+          });
+          btn.classList.add('bg-orange-600','text-white').remove('bg-gray-100');
+        });
+      });
+      // Initialize first slide
+      if (robotButtons[0]) robotButtons[0].classList.add('bg-orange-600','text-white');
+    });
+
+    document.querySelectorAll('#faq details').forEach(detail => {
+      const body = detail.querySelector('div');
+
+      // on init: if open, set maxHeight so transition works
+      if (detail.open) {
+        body.style.maxHeight = body.scrollHeight + 'px';
+      } else {
+        body.style.maxHeight = '0';
+      }
+
+      detail.addEventListener('toggle', () => {
+        // animate this panel
+        if (detail.open) {
+          body.style.maxHeight = body.scrollHeight + 'px';
+        } else {
+          body.style.maxHeight = '0px';
+        }
+      });
+    });
+  </script>
+</body>
+</html>
