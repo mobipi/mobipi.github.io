@@ -17,12 +17,11 @@
   <nav class="fixed top-0 w-full bg-white/60 backdrop-blur-md z-50">
     <div class="max-w-7xl mx-auto flex items-center justify-between px-6 py-4">
       <a href="#" class="text-xl font-semibold">Mobi-π</a>
-      <ul class="hidden md:flex space-x-8 text-sm uppercase">
-        <li><a href="#paper" class="hover:underline">Paper</a></li>
-        <li><a href="#video" class="hover:underline">Video</a></li>
-        <li><a href="#code" class="hover:underline">Code</a></li>
-        <li><a href="#bibtex" class="hover:underline">Bibtex</a></li>
-        <li><a href="#contact" class="hover:underline">Contact</a></li>
+      <ul class="hidden md:flex space-x-8 text-sm">
+        <li><a href="./pdf/mobipi.pdf" class="hover:text-orange-600">Paper</a></li>
+        <li><a href="https://github.com/yjy0625/mobipi" class="hover:text-orange-600">Code</a></li>
+        <li><a href="#bibtex" class="hover:text-orange-600">Bibtex</a></li>
+        <li><a href="mailto:jingyuny@stanford.edu" class="hover:text-orange-600">Contact</a></li>
       </ul>
       <button class="md:hidden">
         <svg xmlns="http://www.w3.org/2000/svg" class="h-6 w-6" fill="none" viewBox="0 0 24 24" stroke="currentColor">
@@ -38,8 +37,8 @@
       <h1 class="text-7xl font-bold">Mobi-π</h1>
       <p class="mt-2 text-3xl text-gray-800">Mobilizing Your Robot Learning Policy</p>
       <div class="mt-6 flex justify-center space-x-4">
-        <a href="#paper" class="px-6 py-3 bg-orange-600 text-white rounded-full text-lg hover:bg-orange-700">Read Paper</a>
-        <a href="#video" class="px-6 py-3 bg-gray-100 rounded-full text-lg hover:bg-gray-200">Code (Available in June)</a>
+        <a href="./pdf/mobipi.pdf" class="px-6 py-3 bg-orange-600 text-white rounded-full text-lg hover:bg-orange-700">Read Paper</a>
+        <a href="https://github.com/yjy0625/mobipi" class="px-6 py-3 bg-gray-100 rounded-full text-lg hover:bg-gray-200">Code (Available in June)</a>
       </div>
       <div class="mt-12 border-2 border-gray-600 rounded-3xl overflow-hidden">
         <video src="./video/summary.mp4" controls class="w-full max-w-4xl mx-auto rounded-2xl"></video>
@@ -49,10 +48,6 @@
 
   <!-- TL;DR -->
   <section class="pb-16 pt-14 px-6 bg-orange-50">
-    <!-- <div class="max-w-3xl mx-auto bg-gray-100 p-6 rounded-lg">
-      <h2 class="text-lg font-semibold mb-4">TL;DR</h2>
-      <p>We propose novel metrics, tasks, visualization tools and methods for “policy mobilization,” the problem of taking a non-mobile manipulation policy and finding a proper initial robot pose from which to execute it on a mobile platform.</p>
-    </div> -->
     <div class="max-w-4xl mx-auto p-4">
       <div class="inline-block bg-orange-600 text-white text-xl font-semibold rounded-lg px-3 py-2 mb-4">
         TL;DR
@@ -316,7 +311,7 @@
       </div>
     </div>
     <div class="mt-12 flex justify-center space-x-4">
-      <a href="#paper" class="flex items-center px-6 py-3 pr-5 bg-orange-600 text-white rounded-xl text-lg hover:bg-orange-700">Learn More In Our Paper <span><svg  xmlns="http://www.w3.org/2000/svg"
+      <a href="./pdf/mobipi.pdf" class="flex items-center px-6 py-3 pr-5 bg-orange-600 text-white rounded-xl text-lg hover:bg-orange-700">Learn More In Our Paper <span><svg  xmlns="http://www.w3.org/2000/svg"
        class="w-6 h-6 pt-0.5 ml-2 fill-current text-white"
        viewBox="0 0 24 24"><path d="M18,12h0a2,2,0,0,0-.59-1.4l-4.29-4.3a1,1,0,0,0-1.41,0,1,1,0,0,0,0,1.42L15,11H5a1,1,0,0,0,0,2H15l-3.29,3.29a1,1,0,0,0,1.41,1.42l4.29-4.3A2,2,0,0,0,18,12Z"/></svg></span></a>
     </div>
@@ -496,7 +491,7 @@
       <details open class="group">
         <summary class="flex justify-between items-center p-4 cursor-pointer bg-white select-none">
           <span class="text-lg font-semibold text-gray-900 pr-6">Why should I care about policy mobilization? Why not simply train a mobile manipulation policy from a large dataset?</span>
-          <svg class="w-5 h-5 text-gray-500" xmlns="http://www.w3.org/2000/svg" fill="none"
+          <svg class="w-5 h-5 text-gray-500 min-w-5" xmlns="http://www.w3.org/2000/svg" fill="none"
                viewBox="0 0 24 24" stroke="currentColor">
             <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2"
                   d="M19 9l-7 7-7-7" />
@@ -504,7 +499,7 @@
         </summary>
         <div class="px-4 pb-4 overflow-hidden transition-all duration-300 ease-in-out">
           <p class="text-gray-700 text-lg">
-            Indeed, one approach to learning mobile manipulation is to train a policy from a dataset that includes both navigation and manipulation data. However, training such a policy typically requires large amounts of training data, since the policy needs to not only generalize to different navigation and manipulation scenarios but also seamlessly coordinate navigation and manipulation. We showed in our simulation experiments that an imitation learning baseline that learns an end-to-end policy for navigation and manipulation fails to perform well in unseen room layouts despite learning from 5x more training data. Compared to training an end-to-end mobile manipulation policy, our policy mobilization framework provides a more data-efficient approach to learning mobile manipulation.
+            Indeed, one approach to learning mobile manipulation is to train a policy from a dataset that includes both navigation and manipulation data. However, training such a policy typically requires large amounts of training data, since the policy needs to not only generalize to different navigation and manipulation scenarios but also seamlessly coordinate navigation and manipulation. We showed in our simulation experiments that an imitation learning baseline that learns an end-to-end policy for navigation and manipulation fails to perform well in unseen room layouts despite learning from 5x more training data. Compared to training an end-to-end mobile manipulation policy, our policy mobilization framework provides a more data-efficient approach to learning mobile manipulation. Meanwhile, our problem formulation complements existing efforts to improve the robustness of manipulation policies and remains compatible with them.
           </p>
         </div>
       </details>
@@ -512,7 +507,7 @@
       <details class="group">
         <summary class="flex justify-between items-center p-4 cursor-pointer bg-white select-none">
           <span class="text-lg font-semibold text-gray-900 pr-6">Why not train a mobile manipulation policy in simulation and transfer to the real world?</span>
-          <svg class="w-5 h-5 text-gray-500" xmlns="http://www.w3.org/2000/svg" fill="none"
+          <svg class="w-5 h-5 text-gray-500 min-w-5" xmlns="http://www.w3.org/2000/svg" fill="none"
                viewBox="0 0 24 24" stroke="currentColor">
             <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2"
                   d="M19 9l-7 7-7-7" />
@@ -528,7 +523,7 @@
       <details class="group">
         <summary class="flex justify-between items-center p-4 cursor-pointer bg-white select-none">
           <span class="text-lg font-semibold text-gray-900 pr-6">How does the approach handle distractors?</span>
-          <svg class="w-5 h-5 text-gray-500" xmlns="http://www.w3.org/2000/svg" fill="none"
+          <svg class="w-5 h-5 text-gray-500 min-w-5" xmlns="http://www.w3.org/2000/svg" fill="none"
                viewBox="0 0 24 24" stroke="currentColor">
             <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2"
                   d="M19 9l-7 7-7-7" />
@@ -544,7 +539,7 @@
       <details class="group">
         <summary class="flex justify-between items-center p-4 cursor-pointer bg-white select-none">
           <span class="text-lg font-semibold text-gray-900 pr-6">Can the method handle imperfect scene reconstruction?</span>
-          <svg class="w-5 h-5 text-gray-500" xmlns="http://www.w3.org/2000/svg" fill="none"
+          <svg class="w-5 h-5 text-gray-500 min-w-5" xmlns="http://www.w3.org/2000/svg" fill="none"
                viewBox="0 0 24 24" stroke="currentColor">
             <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2"
                   d="M19 9l-7 7-7-7" />
@@ -560,7 +555,7 @@
       <details class="group">
         <summary class="flex justify-between items-center p-4 cursor-pointer bg-white select-none">
           <span class="text-lg font-semibold text-gray-900 pr-6">I have other questions. How can I get an answer?</span>
-          <svg class="w-5 h-5 text-gray-500" xmlns="http://www.w3.org/2000/svg" fill="none"
+          <svg class="w-5 h-5 text-gray-500 min-w-5" xmlns="http://www.w3.org/2000/svg" fill="none"
                viewBox="0 0 24 24" stroke="currentColor">
             <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2"
                   d="M19 9l-7 7-7-7" />
