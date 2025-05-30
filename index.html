@@ -161,14 +161,18 @@
         <div class="w-12 h-12 rounded-full bg-orange-600 text-white flex items-center justify-center text-lg font-bold mb-4">1</div>
         <h3 class="text-2xl font-semibold">Capture</h3>
         <p class="mt-2 text-gray-800 text-lg/7">Drive the robot around to capture the test-time scene.</p>
-        <video src="./video/method/capture.mp4" class="mt-4 w-full rounded-lg" loop muted autoplay></video>
+        <div class="border-gray-200 border-2 rounded-lg mt-4 w-full overflow-hidden">
+          <video src="./video/method/capture.mp4" class="w-full rounded-sm" loop muted autoplay></video>
+        </div>
       </div>
       <!-- Step 2 -->
       <div class="p-6">
         <div class="w-12 h-12 rounded-full bg-orange-600 text-white flex items-center justify-center text-lg font-bold mb-4">2</div>
         <h3 class="text-2xl font-semibold">Splat</h3>
         <p class="mt-2 text-gray-800 text-lg/7">Build a 3D Gaussian Splatting model from the capture.</p>
-        <video src="./video/method/splat.mp4" class="mt-4 w-full rounded-lg" loop muted autoplay></video>
+        <div class="border-gray-200 border-2 rounded-lg mt-4 w-full overflow-hidden">
+          <video src="./video/method/splat.mp4" class="w-full rounded-sm" loop muted autoplay></video>
+        </div>
       </div>
       <!-- Step 3 -->
       <div class="p-6">
@@ -176,7 +180,7 @@
         <h3 class="text-2xl font-semibold">Score</h3>
         <p class="mt-2 text-gray-800 text-lg/7">Use our novel hybrid score function to rate robot poses.</p>
         <div class="border-gray-200 border-2 rounded-lg mt-4 w-full overflow-hidden">
-          <video src="./video/method/score.mp4" class="w-full rounded-lg" loop muted autoplay></video>
+          <video src="./video/method/score.mp4" class="w-full rounded-sm" loop muted autoplay></video>
         </div>
       </div>
       <!-- Step 4 -->
@@ -184,7 +188,9 @@
         <div class="w-12 h-12 rounded-full bg-orange-600 text-white flex items-center justify-center text-lg font-bold mb-4">4</div>
         <h3 class="text-2xl font-semibold">Optimize</h3>
         <p class="mt-2 text-gray-800 text-lg/7">Find the best robot pose with sampling-based optimization.</p>
-        <video src="./video/method/optimize.mp4" class="mt-4 w-full rounded-lg" loop muted autoplay></video>
+        <div class="border-gray-200 border-2 rounded-lg mt-4 w-full overflow-hidden">
+          <video src="./video/method/optimize.mp4" class="w-full rounded-sm" loop muted autoplay></video>
+        </div>
       </div>
     </div>
   </section>
@@ -586,7 +592,7 @@
       <pre class="mt-6 bg-gray-100 p-6 rounded-lg text-left overflow-auto text-sm">@inproceedings{yang2025mobipi,
   title={Mobi-$\pi$: Mobilizing Your Robot Learning Policy},
   author={Yang, Jingyun and Huang, Isabella and Vu, Brandon and Bajracharya, Max and Antonova, Rika and Bohg, Jeannette},
-  booktitle={ArXiv},
+  booktitle={arXiv preprint arXiv:2505.23692},
   year={2025}
 }</pre>
     </div>
