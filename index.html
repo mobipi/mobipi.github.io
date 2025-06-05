@@ -22,7 +22,7 @@
 </head>
 <body class="antialiased text-gray-900">
   <!-- Navigation -->
-  <nav class="fixed top-0 w-full bg-white/60 backdrop-blur-md z-50">
+  <nav id="navbar" class="fixed top-0 w-full bg-white/60 backdrop-blur-md z-50 transition-all duration-500">
     <div class="max-w-7xl mx-auto flex items-center justify-between px-6 py-4">
       <a href="#" class="text-xl font-semibold">Mobi-π</a>
 
@@ -67,7 +67,7 @@
 
   <!-- Mobile Overlay Menu -->
   <div id="mobile-menu"
-       class="fixed inset-0 bg-white/70 backdrop-blur-md z-40 flex flex-col items-center justify-center space-y-8
+       class="fixed inset-0 bg-white/60 backdrop-blur-md z-40 flex flex-col items-center justify-center space-y-8
               transition-opacity duration-300 opacity-0 pointer-events-none">
     <!-- Wrap the links in a container so we can detect clicks outside these items -->
     <div id="mobile-links" class="flex flex-col items-center space-y-6">
@@ -737,6 +737,7 @@
     const hamburgerIcon    = document.getElementById('hamburger-icon');
     const closeIcon        = document.getElementById('close-icon');
     const mobileLinksGroup = document.getElementById('mobile-links');
+    const navbar           = document.getElementById('navbar');
 
     let menuOpen = false;
 
@@ -749,6 +750,10 @@
       hamburgerIcon.classList.add('opacity-0','-rotate-90');
       closeIcon.classList.remove('opacity-0','rotate-90');
       closeIcon.classList.add('opacity-100','rotate-0');
+
+      // Remove the navbar's own blur/background so only the overlay is blurring
+      navbar.classList.remove('bg-white/60', 'backdrop-blur-md');
+      navbar.classList.add('bg-white/0');
 
       // Show overlay with fade-in
       mobileMenu.classList.remove('opacity-0','pointer-events-none');
@@ -767,6 +772,10 @@
       hamburgerIcon.classList.add('opacity-100','rotate-0');
       closeIcon.classList.remove('opacity-100','rotate-0');
       closeIcon.classList.add('opacity-0','rotate-90');
+
+      // Restore navbar’s original blur/background
+      navbar.classList.remove('bg-white/0');
+      navbar.classList.add('bg-white/60', 'backdrop-blur-md');
 
       // Hide overlay with fade-out
       mobileMenu.classList.remove('opacity-100','pointer-events-auto');
