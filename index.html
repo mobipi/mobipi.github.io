@@ -25,6 +25,8 @@
   <nav class="fixed top-0 w-full bg-white/60 backdrop-blur-md z-50">
     <div class="max-w-7xl mx-auto flex items-center justify-between px-6 py-4">
       <a href="#" class="text-xl font-semibold">Mobi-π</a>
+
+      <!-- Desktop links (hidden on mobile) -->
       <ul class="hidden md:flex space-x-8 text-sm">
         <li><a href="./pdf/mobipi.pdf" class="hover:text-orange-600">Paper</a></li>
         <li><a href="https://arxiv.org/abs/2505.23692" class="hover:text-orange-600">Arxiv</a></li>
@@ -32,13 +34,50 @@
         <li><a href="#bibtex" class="hover:text-orange-600">Bibtex</a></li>
         <li><a href="mailto:jingyuny@stanford.edu" class="hover:text-orange-600">Contact</a></li>
       </ul>
-      <button class="md:hidden">
-        <svg xmlns="http://www.w3.org/2000/svg" class="h-6 w-6" fill="none" viewBox="0 0 24 24" stroke="currentColor">
-          <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M4 6h16M4 12h16M4 18h16" />
+
+      <!-- Mobile menu button -->
+      <button id="menu-button" class="md:hidden relative w-6 h-6 focus:outline-none">
+        <!-- Hamburger icon -->
+        <svg id="hamburger-icon"
+             xmlns="http://www.w3.org/2000/svg"
+             class="absolute inset-0 w-6 h-6 transform transition-all duration-300 opacity-100 rotate-0"
+             fill="none"
+             viewBox="0 0 24 24"
+             stroke="currentColor">
+          <path stroke-linecap="round"
+                stroke-linejoin="round"
+                stroke-width="2"
+                d="M4 6h16M4 12h16M4 18h16" />
+        </svg>
+        <!-- “X” icon -->
+        <svg id="close-icon"
+             xmlns="http://www.w3.org/2000/svg"
+             class="absolute inset-0 w-6 h-6 transform transition-all duration-300 opacity-0 rotate-90"
+             fill="none"
+             viewBox="0 0 24 24"
+             stroke="currentColor">
+          <path stroke-linecap="round"
+                stroke-linejoin="round"
+                stroke-width="2"
+                d="M6 18L18 6M6 6l12 12" />
         </svg>
       </button>
     </div>
   </nav>
+
+  <!-- Mobile Overlay Menu -->
+  <div id="mobile-menu"
+       class="fixed inset-0 bg-white/70 backdrop-blur-md z-40 flex flex-col items-center justify-center space-y-8
+              transition-opacity duration-300 opacity-0 pointer-events-none">
+    <!-- Wrap the links in a container so we can detect clicks outside these items -->
+    <div id="mobile-links" class="flex flex-col items-center space-y-6">
+      <a href="./pdf/mobipi.pdf" class="text-2xl font-semibold hover:text-orange-600">Paper</a>
+      <a href="https://arxiv.org/abs/2505.23692" class="text-2xl font-semibold hover:text-orange-600">Arxiv</a>
+      <a href="https://github.com/yjy0625/mobipi" class="text-2xl font-semibold hover:text-orange-600">Code</a>
+      <a href="#bibtex" class="text-2xl font-semibold hover:text-orange-600">Bibtex</a>
+      <a href="mailto:jingyuny@stanford.edu" class="text-2xl font-semibold hover:text-orange-600">Contact</a>
+    </div>
+  </div>
 
   <!-- Hero Section -->
   <section class="pt-32 pb-24 text-center">
@@ -582,7 +621,7 @@
         </summary>
         <div class="px-4 pb-4 overflow-hidden transition-all duration-300 ease-in-out">
           <p class="text-gray-700 text-lg">
-            Training a mobile manipulation policy in simulation from 3DGS requires creating an interactive and physically accurate simulation from the 3DGS model, which is an unsolved problem.
+            Training a mobile manipulation policy in simulation requires creating an interactive and physically accurate simulation. This is still an unsolved problem for many tasks, like those with deformable and granular objects.
           </p>
         </div>
       </details>
@@ -638,7 +677,7 @@
   </section>
 
   <!-- Cite Us -->
-  <section id="bibtex" class="py-24 px-6">
+  <section id="bibtex" class="py-16 px-6">
     <div class="max-w-3xl mx-auto text-center">
       <p class="text-md text-gray-600 font-semibold uppercase tracking-wide">Found our work useful?</p>
       <h2 class="text-4xl font-bold mt-2">Cite Us</h2>
@@ -651,11 +690,117 @@
     </div>
   </section>
 
+  <!-- Related Research -->
+  <section class="py-8 pb-24 px-6">
+    <div class="max-w-4xl mx-auto text-center">
+      <p class="text-md text-gray-600 font-semibold uppercase tracking-wide">Want more reading?</p>
+      <h2 class="text-4xl font-bold mt-2">Related Research</h2>
+    </div>
+    <div class="mt-6 grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-3 gap-8 px-6 max-w-4xl mx-auto">
+      <!-- Card 1 -->
+      <div class="text-left">
+        <p class="mt-4 font-bold underline"><a href="https://equi-bot.github.io" class="hover:text-orange-600">EquiBot</a></p>
+        <p class="mt-2 text-gray-700 text-base">
+          Generalizable and data-efficient policy learning method powered by equivariant architectures, deployed on a mobile platform.
+        </p>
+      </div>
+
+      <!-- Card 2 -->
+      <div class="text-left">
+        <p class="mt-4 font-bold underline"><a href="https://homer-manip.github.io" class="hover:text-orange-600">HoMeR</a></p>
+        <p class="mt-2 text-gray-700 text-base">
+          Combining hybrid IL agent and whole-body controller enables sample-efficient and generalizable mobile manipulation.
+        </p>
+      </div>
+
+      <!-- Card 3 -->
+      <div class="text-left">
+        <p class="mt-4 font-bold underline"><a href="https://robofume.github.io" class="hover:text-orange-600">RoboFuME</a></p>
+        <p class="mt-2 text-gray-700 text-base">
+          Reset-free finetuning system that autonomously improves a pre-trained multi-task manipulation policy without human intervention.
+        </p>
+      </div>
+    </div>
+  </section>
+
   <!-- Footer -->
   <footer class="bg-white border-t py-6 px-6 text-center text-sm text-gray-500">
     <p>&copy; 2025 Mobi-π. All rights reserved.</p>
     <p>Contact: <a href="mailto:jingyuny@stanford.edu" class="underline">jingyuny@stanford.edu</a></p>
   </footer>
+
+  <!-- Scripts for Menus -->
+  <script>
+    // Grab the elements
+    const menuButton       = document.getElementById('menu-button');
+    const mobileMenu       = document.getElementById('mobile-menu');
+    const hamburgerIcon    = document.getElementById('hamburger-icon');
+    const closeIcon        = document.getElementById('close-icon');
+    const mobileLinksGroup = document.getElementById('mobile-links');
+
+    let menuOpen = false;
+
+    // Function to open the mobile menu
+    function openMenu() {
+      menuOpen = true;
+
+      // Animate icons
+      hamburgerIcon.classList.remove('opacity-100','rotate-0');
+      hamburgerIcon.classList.add('opacity-0','-rotate-90');
+      closeIcon.classList.remove('opacity-0','rotate-90');
+      closeIcon.classList.add('opacity-100','rotate-0');
+
+      // Show overlay with fade-in
+      mobileMenu.classList.remove('opacity-0','pointer-events-none');
+      mobileMenu.classList.add('opacity-100','pointer-events-auto');
+
+      // Disable background scrolling
+      document.body.classList.add('overflow-hidden');
+    }
+
+    // Function to close the mobile menu
+    function closeMenu() {
+      menuOpen = false;
+
+      // Animate icons back
+      hamburgerIcon.classList.remove('opacity-0','-rotate-90');
+      hamburgerIcon.classList.add('opacity-100','rotate-0');
+      closeIcon.classList.remove('opacity-100','rotate-0');
+      closeIcon.classList.add('opacity-0','rotate-90');
+
+      // Hide overlay with fade-out
+      mobileMenu.classList.remove('opacity-100','pointer-events-auto');
+      mobileMenu.classList.add('opacity-0','pointer-events-none');
+
+      // Re-enable background scrolling
+      document.body.classList.remove('overflow-hidden');
+    }
+
+    // Toggle on button click
+    menuButton.addEventListener('click', () => {
+      if (menuOpen) {
+        closeMenu();
+      } else {
+        openMenu();
+      }
+    });
+
+    // Close menu if clicking anywhere outside the links
+    mobileMenu.addEventListener('click', (e) => {
+      // If the click is not on one of the <a> elements inside #mobile-links, close
+      if (!mobileLinksGroup.contains(e.target)) {
+        closeMenu();
+      }
+    });
+
+    // Also close when any link is clicked (the navigation will happen automatically)
+    const allMobileLinks = mobileLinksGroup.querySelectorAll('a');
+    allMobileLinks.forEach(link => {
+      link.addEventListener('click', () => {
+        closeMenu();
+      });
+    });
+  </script>
 
   <!-- Scripts for Carousels -->
   <script>
